@@ -1,33 +1,33 @@
 {
-  "name": "hpolyfill",
-  "version": "0.1.0",
-  "description": "Some common polyfills.",
-  "main": "dist/index.js",
-  "scripts": {
-    "build": "rollup -c"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/huang2002/hpolyfill.git"
-  },
-  "keywords": [
-    "hpolyfill",
-    "polyfill",
-    "lightweight",
-    "3h"
-  ],
-  "author": "3h",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/huang2002/hpolyfill/issues"
-  },
-  "homepage": "https://github.com/huang2002/hpolyfill#readme",
-  "devDependencies": {
-    "rollup": "^0.66.4",
-    "rollup-plugin-terser": "^3.0.0",
-    "terser": "^3.9.2"
-  },
-  "files": [
-    "dist"
-  ]
+    "name": "hpolyfill",
+    "version": "0.1.1",
+    "description": "A lightweight polyfill lib.",
+    "main": "dist/index.js",
+    "scripts": {
+        "build": "rollup -c"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/huang2002/hpolyfill.git"
+    },
+    "keywords": [
+        "hpolyfill",
+        "polyfill",
+        "lightweight",
+        "3h"
+    ],
+    "author": "3h",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/huang2002/hpolyfill/issues"
+    },
+    "homepage": "https://github.com/huang2002/hpolyfill#readme",
+    "devDependencies": {
+        "rollup": "^0.66.4",
+        "rollup-plugin-terser": "^3.0.0",
+        "terser": "^3.9.2"
+    },
+    "files": [
+        "dist"
+    ]
 }
