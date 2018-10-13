@@ -1,4 +1,4 @@
-export function patch(target, name, polyfill) {
+export var patch = function (target, name, polyfill) {
     if (typeof target[name] !== 'function') {
         Object.defineProperty(target, name, {
             value: polyfill,
@@ -8,19 +8,19 @@ export function patch(target, name, polyfill) {
     }
 }
 
-export function patchSome(target, map) {
+export var patchSome = function (target, map) {
     for (var name in map) {
         patch(target, name, map[name]);
     }
 }
 
-export function check(value) {
+export var check = function (value) {
     if (value == null) {
         throw new TypeError('Cannot convert undefined or null to object');
     }
 }
 
-export function createClass(constructor, prototype) {
+export var createClass = function (constructor, prototype) {
     for (var key in prototype) {
         var desc = prototype[key];
         Object.defineProperty(
@@ -34,17 +34,17 @@ export function createClass(constructor, prototype) {
     return constructor;
 }
 
-export function checkThis(self, constructor) {
+export var checkThis = function (self, constructor) {
     if (!(self instanceof constructor)) {
         throw new TypeError('Cannot call a class as a function');
     }
 }
 
-export function pick(value, standby) {
+export var pick = function (value, standby) {
     return value !== undefined ? value : standby;
 }
 
-export function test(target, name, tester) {
+export var test = function (target, name, tester) {
     var value = target[name];
     if (typeof value !== 'function' || !tester(value)) {
         delete target[name];

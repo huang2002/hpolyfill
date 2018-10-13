@@ -22,7 +22,7 @@ patch(window, 'Map', createClass(
 
     }, {
 
-        _findIndex: {
+        _indexOf: {
             value: function (key) {
                 if (Object.is(key, -0)) {
                     key = +0;
@@ -41,13 +41,13 @@ patch(window, 'Map', createClass(
 
         has: {
             value: function (key) {
-                return this._findIndex(key) >= 0;
+                return this._indexOf(key) >= 0;
             }
         },
 
         get: {
             value: function (key) {
-                var index = this._findIndex(key);
+                var index = this._indexOf(key);
                 return index >= 0 ? this._values[index] : undefined;
             }
         },
@@ -59,7 +59,7 @@ patch(window, 'Map', createClass(
                     key = +0;
                 }
 
-                var index = this._findIndex(key);
+                var index = this._indexOf(key);
 
                 if (index >= 0) {
                     this._values[index] = value;
@@ -75,7 +75,7 @@ patch(window, 'Map', createClass(
 
         delete: {
             value: function (key) {
-                var index = this._findIndex(key);
+                var index = this._indexOf(key);
                 if (index >= 0) {
                     this._keys.splice(index, 1);
                     this._values.splice(index, 1);

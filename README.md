@@ -10,7 +10,7 @@ This is a lightweight(less than 10KB after minimization) polyfill lib which only
     - `set.forEach()`
     - `set.delete()`
     - `set.clear()`
-    - `set.size()`
+    - `set.size`
 - Map
     - basic functionality
     - constructor arguments
@@ -19,7 +19,7 @@ This is a lightweight(less than 10KB after minimization) polyfill lib which only
     - `map.forEach()`
     - `map.delete()`
     - `map.clear()`
-    - `map.size()`
+    - `map.size`
 - Promise
     - basic functionality
     - `Promise.all()`

@@ -19,7 +19,7 @@ patch(window, 'Set', createClass(
 
     }, {
 
-        _findIndex: {
+        _indexOf: {
             value: function (element) {
                 if (Object.is(element, -0)) {
                     element = +0;
@@ -38,7 +38,7 @@ patch(window, 'Set', createClass(
 
         has: {
             value: function (element) {
-                return this._findIndex(element) >= 0;
+                return this._indexOf(element) >= 0;
             }
         },
 
@@ -60,7 +60,7 @@ patch(window, 'Set', createClass(
 
         delete: {
             value: function (element) {
-                var index = this._findIndex(element);
+                var index = this._indexOf(element);
                 if (index >= 0) {
                     this._values.splice(index, 1);
                 }
