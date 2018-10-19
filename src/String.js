@@ -1,4 +1,19 @@
-import { patchSome, pick } from "./utils";
+import { patch, patchSome, pick, check } from "./utils";
+
+patch(String, 'raw', function (template) {
+
+    check(template);
+
+    var args = arguments,
+        substitutionCount = args.length - 1,
+        fragments = Array.from(template.raw),
+        gapCount = fragments.length - 1;
+
+    return fragments.reduce(function (chunk, frag, i) {
+        return chunk + (i < gapCount && i < substitutionCount ? frag + args[i + 1] : frag);
+    }, '');
+
+});
 
 patchSome(String.prototype, {
 

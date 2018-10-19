@@ -68,6 +68,7 @@ assert(map.size, 1);
 assert(map.get(-0), -1);
 
 // string
+assert(String.raw({ raw: ['a', 'c'] }, 'b', 'd'), 'abc');
 assert('test'.includes('es'));
 assert('test'.includes('es', 1));
 assert('test'.includes('es', 2), false);

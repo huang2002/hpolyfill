@@ -1,3 +1,7 @@
+## 0.2.0 - 2018-10-19
+
+- Add `String.raw()`
+
 ### 0.1.2 - 2018-10-13
 
 - Improve some internals

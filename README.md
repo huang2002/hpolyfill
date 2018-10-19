@@ -39,7 +39,8 @@ This is a lightweight(less than 10KB after minimization) polyfill lib which only
 - Number
     - `Number.isNaN()`
     - `Number.isFinite()`
-- string
+- String
+    - `String.raw()`
     - `string.includes()`
     - `string.repeat()`
     - `string.startsWith()`
