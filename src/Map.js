@@ -1,4 +1,4 @@
-import { test, patch, createClass, checkThis } from "./utils";
+import { test, patch, createClass, checkThis, findIndex } from "./utils";
 
 test(window, 'Map', function (Map) {
     var map = new Map([[-0, 1], [+0, 1]]);
@@ -22,17 +22,6 @@ patch(window, 'Map', createClass(
 
     }, {
 
-        _indexOf: {
-            value: function (key) {
-                if (Object.is(key, -0)) {
-                    key = +0;
-                }
-                return this._keys.findIndex(function (ele) {
-                    return Object.is(ele, key);
-                });
-            }
-        },
-
         size: {
             get: function () {
                 return this._keys.length;
@@ -41,13 +30,13 @@ patch(window, 'Map', createClass(
 
         has: {
             value: function (key) {
-                return this._indexOf(key) >= 0;
+                return findIndex(this._keys, key) >= 0;
             }
         },
 
         get: {
             value: function (key) {
-                var index = this._indexOf(key);
+                var index = findIndex(this._keys, key);
                 return index >= 0 ? this._values[index] : undefined;
             }
         },
@@ -59,7 +48,7 @@ patch(window, 'Map', createClass(
                     key = +0;
                 }
 
-                var index = this._indexOf(key);
+                var index = findIndex(this._keys, key);
 
                 if (index >= 0) {
                     this._values[index] = value;
@@ -75,7 +64,7 @@ patch(window, 'Map', createClass(
 
         delete: {
             value: function (key) {
-                var index = this._indexOf(key);
+                var index = findIndex(this._keys, key);
                 if (index >= 0) {
                     this._keys.splice(index, 1);
                     this._values.splice(index, 1);

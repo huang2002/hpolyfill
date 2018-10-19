@@ -1,4 +1,4 @@
-import { test, patch, createClass, checkThis } from "./utils";
+import { test, patch, createClass, checkThis, findIndex } from "./utils";
 
 test(window, 'Set', function (Set) {
     var set = new Set([-0, +0]);
@@ -19,17 +19,6 @@ patch(window, 'Set', createClass(
 
     }, {
 
-        _indexOf: {
-            value: function (element) {
-                if (Object.is(element, -0)) {
-                    element = +0;
-                }
-                return this._values.findIndex(function (ele) {
-                    return Object.is(ele, element);
-                });
-            }
-        },
-
         size: {
             get: function () {
                 return this._values.length;
@@ -38,7 +27,7 @@ patch(window, 'Set', createClass(
 
         has: {
             value: function (element) {
-                return this._indexOf(element) >= 0;
+                return findIndex(this._values, element) >= 0;
             }
         },
 
@@ -60,7 +49,7 @@ patch(window, 'Set', createClass(
 
         delete: {
             value: function (element) {
-                var index = this._indexOf(element);
+                var index = findIndex(this._values, element);
                 if (index >= 0) {
                     this._values.splice(index, 1);
                 }

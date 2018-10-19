@@ -67,8 +67,10 @@ let map = new Map([[+0, 1], [-0, -1]]);
 assert(map.size, 1);
 assert(map.get(-0), -1);
 
-// string
+// String
 assert(String.raw({ raw: ['a', 'c'] }, 'b', 'd'), 'abc');
+
+// string
 assert('test'.includes('es'));
 assert('test'.includes('es', 1));
 assert('test'.includes('es', 2), false);
@@ -85,6 +87,12 @@ assert('test'.padStart(8, 'abc'), 'abca' + 'test');
 assert('test'.padEnd(6), 'test  ');
 assert('test'.padEnd(6, 'abc'), 'test' + 'ab');
 assert('test'.padEnd(8, 'abc'), 'test' + 'abca');
+
+// Symbol
+assert(Symbol('test') !== Symbol('test'));
+assert(Symbol('test') !== Symbol.for('test'));
+assert(Symbol.for('test') === Symbol.for('test'));
+assert(Symbol.keyFor(Symbol.for('test')), 'test');
 
 // Promise
 function resolveLater(data, delay) {

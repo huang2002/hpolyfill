@@ -5,3 +5,4 @@ import "./Object";
 import "./Promise";
 import "./Set";
 import "./Map";
+import "./Symbol";

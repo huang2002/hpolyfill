@@ -1,6 +1,6 @@
 {
     "name": "hpolyfill",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "description": "A lightweight polyfill lib.",
     "main": "dist/index.js",
     "scripts": {

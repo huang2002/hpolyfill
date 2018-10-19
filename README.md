@@ -36,6 +36,9 @@ This is a lightweight(less than 10KB after minimization) polyfill lib which only
     - `array.findIndex()`
     - `array.flat()`
     - `array.flatMap()`
+- Object
+    - `Object.assign()`
+    - `Object.is()`
 - Number
     - `Number.isNaN()`
     - `Number.isFinite()`
@@ -47,9 +50,10 @@ This is a lightweight(less than 10KB after minimization) polyfill lib which only
     - `string.endsWith()`
     - `string.padStart()`
     - `string.padEnd()`
-- Object
-    - `Object.assign()`
-    - `Object.is()`
+- `Symbol`
+    - basic functionality
+    - `Symbol.for()`
+    - `Symbol.keyFor()`
 
 # ps
 

@@ -1,3 +1,9 @@
+## 0.3.0 - 2018-10-19
+
+- Add `Symbol()`
+- Add `Symbol.for()`
+- Add `Symbol.keyFor()`
+
 ## 0.2.0 - 2018-10-19
 
 - Add `String.raw()`
