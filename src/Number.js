@@ -1,6 +1,6 @@
-import { patchSome } from "./utils";
+import { patchSome, Num } from "./utils";
 
-patchSome(Number, {
+patchSome(Num, {
 
     isNaN: function (value) {
         return value !== value;

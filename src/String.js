@@ -1,12 +1,14 @@
-import { patch, patchSome, pick, check } from "./utils";
+import { patch, patchSome, pick, check, Arr, Str, StrProto, Num } from "./utils";
+import { ITER_SYM } from "./Symbol";
+import { arrIter } from "./Array";
 
-patch(String, 'raw', function (template) {
+patch(Str, 'raw', function (template) {
 
     check(template);
 
     var args = arguments,
         substitutionCount = args.length - 1,
-        fragments = Array.from(template.raw),
+        fragments = Arr.from(template.raw),
         gapCount = fragments.length - 1;
 
     return fragments.reduce(function (chunk, frag, i) {
@@ -15,11 +17,11 @@ patch(String, 'raw', function (template) {
 
 });
 
-patchSome(String.prototype, {
+patchSome(StrProto, {
 
     repeat: function (count) {
 
-        if (!Number.isFinite(count)) {
+        if (!Num.isFinite(count)) {
             throw new RangeError('repeat count must be infinite');
         } else if (count < 0) {
             throw new RangeError('repeat count must be non-negative');
@@ -114,3 +116,5 @@ patchSome(String.prototype, {
     }
 
 });
+
+patch(StrProto, ITER_SYM, arrIter);

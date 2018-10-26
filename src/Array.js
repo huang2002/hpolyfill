@@ -1,16 +1,18 @@
-import { patchSome, check, pick } from "./utils";
+import { patch, patchSome, check, pick, Arr, ArrProto, none } from "./utils";
+import { ITER_SYM } from "./Symbol";
 
-patchSome(Array, {
+patchSome(Arr, {
 
     from: function (arrayLike) {
 
         check(arrayLike);
 
-        var result = [],
-            mapFn = arguments[1],
-            thisArg = arguments[2];
+        var args = arguments,
+            result = [],
+            mapFn = args[1],
+            thisArg = args[2];
 
-        if (Array.isArray(arrayLike)) {
+        if (Arr.isArray(arrayLike)) {
 
             result = arrayLike.slice();
 
@@ -39,12 +41,12 @@ patchSome(Array, {
     },
 
     of: function () {
-        return Array.from(arguments);
+        return Arr.from(arguments);
     }
 
 });
 
-patchSome(Array.prototype, {
+patchSome(ArrProto, {
 
     includes: function (element) {
         var length = this.length,
@@ -59,18 +61,20 @@ patchSome(Array.prototype, {
     },
 
     find: function (predicate) {
-        var length = this.length;
-        for (var i = pick(arguments[1], 0); i < length; i++) {
-            if (predicate.call(arguments[1], this[i], this)) {
+        var args = arguments,
+            length = this.length;
+        for (var i = pick(args[1], 0); i < length; i++) {
+            if (predicate.call(args[1], this[i], this)) {
                 return this[i];
             }
         }
     },
 
     findIndex: function (predicate) {
-        var length = this.length;
-        for (var i = pick(arguments[1], 0); i < length; i++) {
-            if (predicate.call(arguments[1], this[i], this)) {
+        var args = arguments,
+            length = this.length;
+        for (var i = pick(args[1], 0); i < length; i++) {
+            if (predicate.call(args[1], this[i], this)) {
                 return i;
             }
         }
@@ -79,9 +83,10 @@ patchSome(Array.prototype, {
 
     fill: function (value) {
 
-        var end = pick(arguments[2], this.length);
+        var args = arguments,
+            end = pick(args[2], this.length);
 
-        for (var i = pick(arguments[1], 0); i < end; i++) {
+        for (var i = pick(args[1], 0); i < end; i++) {
             this[i] = value;
         }
 
@@ -102,7 +107,7 @@ patchSome(Array.prototype, {
             noArrays = true;
 
             source.forEach(function (element) {
-                if (Array.isArray(element)) {
+                if (Arr.isArray(element)) {
                     noArrays = false;
                     element.forEach(function (ele) {
                         result.push(ele);
@@ -130,3 +135,17 @@ patchSome(Array.prototype, {
     }
 
 });
+
+export var arrIter = function () {
+    var index = 0,
+        self = this;
+    return {
+        next: function () {
+            return index < self.length ?
+                { value: self[index++], done: false } :
+                { value: none, done: true };
+        }
+    };
+};
+
+patch(ArrProto, ITER_SYM, arrIter);

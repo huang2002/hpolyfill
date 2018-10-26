@@ -1,16 +1,29 @@
 "use strict";
-const outputEle = document.getElementById('output');
+const outputEle = document.getElementById('output'),
+    stringify = JSON.stringify;
+function print(type, msg) {
+    outputEle.innerHTML += '<li class="' + type + '">' + msg + '</li>';
+}
 function assert(actual, expected) {
     if (arguments.length < 2) {
         expected = true;
     }
     if (actual === expected) {
-        outputEle.innerHTML += '<li class="log">' + JSON.stringify(expected) + ' passed.' + '</li>';
+        print('log', stringify(expected) + ' passed.' + '</li>');
     } else {
-        const msg = JSON.stringify(expected) + ' actual->' + JSON.stringify(actual);
-        outputEle.innerHTML += '<li class="err">Expect->' + msg + '</li>';
-        console.trace(JSON.stringify(expected) + ' actual->' + JSON.stringify(actual));
+        print('err', 'expect->' + stringify(expected) + ' actual->' + stringify(actual) + '</li>');
+        console.trace(stringify(expected) + ' actual->' + stringify(actual));
     }
+}
+function iterable2array(iterable) {
+    var iterator = iterable[Symbol.iterator](),
+        result = [],
+        t = iterator.next();
+    while (!t.done) {
+        result.push(t.value);
+        t = iterator.next();
+    }
+    return result;
 }
 let o, t;
 
@@ -53,7 +66,7 @@ assert([{}].includes({}), false);
 assert([0, 1, 2].fill(6).join(), '6,6,6');
 assert([0, 1, 2].fill(6, 1, 2).join(), '0,6,2');
 assert([0, [1, 2], [[3]]].flat(Infinity).join(), '0,1,2,3');
-assert([0, [1, 2], [3]].flatMap(function (x) { return x + ''; }).join(' '), '0 1,2 3');
+assert([0, [1, 2], [3]].flatMap(function (x) { return '' + x; }).join(' '), '0 1,2 3');
 assert([0, 2, 4].find(function (x) { return x > 1; }), 2);
 assert([0, 1, 2].findIndex(function (x) { return x > 1; }), 2);
 
@@ -93,6 +106,12 @@ assert(Symbol('test') !== Symbol('test'));
 assert(Symbol('test') !== Symbol.for('test'));
 assert(Symbol.for('test') === Symbol.for('test'));
 assert(Symbol.keyFor(Symbol.for('test')), 'test');
+assert(Symbol.keyFor(Symbol.for({ toString: function () { return 'foo'; } })), 'foo');
+
+// iterator
+assert(iterable2array([0, 1, 2]).join(), '0,1,2');
+assert(iterable2array(new Set([0, 1, 2])).join(), '0,1,2');
+assert(iterable2array(new Map([[0, 1], [2, 3]])).join(';'), '0,1;2,3');
 
 // Promise
 function resolveLater(data, delay) {

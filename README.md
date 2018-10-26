@@ -11,6 +11,7 @@ This is a lightweight(less than 10KB after minimization) polyfill lib which only
     - `set.delete()`
     - `set.clear()`
     - `set.size`
+    - `set[Symbol.iterator]()`
 - Map
     - basic functionality
     - constructor arguments
@@ -20,6 +21,7 @@ This is a lightweight(less than 10KB after minimization) polyfill lib which only
     - `map.delete()`
     - `map.clear()`
     - `map.size`
+    - `map[Symbol.iterator]()`
 - Promise
     - basic functionality
     - `Promise.all()`
@@ -36,6 +38,7 @@ This is a lightweight(less than 10KB after minimization) polyfill lib which only
     - `array.findIndex()`
     - `array.flat()`
     - `array.flatMap()`
+    - `array[Symbol.iterator]()`
 - Object
     - `Object.assign()`
     - `Object.is()`
@@ -50,10 +53,12 @@ This is a lightweight(less than 10KB after minimization) polyfill lib which only
     - `string.endsWith()`
     - `string.padStart()`
     - `string.padEnd()`
+    - `string[Symbol.iterator]()`
 - `Symbol`
     - basic functionality
     - `Symbol.for()`
     - `Symbol.keyFor()`
+    - `Symbol.iterator`
 
 # ps
 

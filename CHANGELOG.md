@@ -1,3 +1,8 @@
+## 0.4.0 - 2018-10-26
+
+- Add iterator support
+- Improve some internals
+
 ## 0.3.0 - 2018-10-19
 
 - Add `Symbol()`

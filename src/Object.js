@@ -1,14 +1,14 @@
-import { patchSome, check } from "./utils";
+import { patchSome, check, Obj, Arr } from "./utils";
 
-patchSome(Object, {
+patchSome(Obj, {
 
     assign: function (target, source) {
 
         check(target);
 
-        target = Object(target);
+        target = Obj(target);
 
-        Array.from(arguments).forEach(function (src, i) {
+        Arr.from(arguments).forEach(function (src, i) {
 
             if (i === 0) {
                 return;

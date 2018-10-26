@@ -1,16 +1,18 @@
-import { patch, patchSome, createClass, checkThis } from "./utils";
+import { patch, patchSome, createClass, checkThis, delay, none, isFn } from "./utils";
 
 var STATUS_PENDING = 'pending',
     STATUS_RESOLVED = 'resolved',
     STATUS_REJECTED = 'rejected';
 
+var Pro;
+
 patch(window, 'Promise', createClass(
     function Promise(executor) {
-        checkThis(this, Promise);
+        checkThis(this, Pro);
 
         this._wait = true;
         this._status = STATUS_PENDING;
-        this._value = undefined;
+        this._value = none;
         this._hasErrorHandled = false;
         this._onresolved = [];
         this._onrejected = [];
@@ -26,13 +28,13 @@ patch(window, 'Promise', createClass(
 
         _resolved: {
             value: function (data) {
-                if (data instanceof Promise) {
+                if (data instanceof Pro) {
                     data.then(this._resolved.bind(this), this._rejected.bind(this));
                 } else {
                     this._status = STATUS_RESOLVED;
                     this._value = data;
                     var callbacks = this._onresolved;
-                    setTimeout(function () {
+                    delay(function () {
                         callbacks.forEach(function (callback) {
                             callback(data);
                         });
@@ -56,7 +58,7 @@ patch(window, 'Promise', createClass(
                 this._value = reason;
                 var callbacks = this._onrejected,
                     self = this;
-                setTimeout(function () {
+                delay(function () {
                     if (callbacks.length) {
                         callbacks.forEach(function (callback) {
                             callback(reason);
@@ -82,13 +84,13 @@ patch(window, 'Promise', createClass(
 
                 var self = this;
 
-                return new Promise(function (resolve, reject) {
+                return new Pro(function (resolve, reject) {
 
                     var status = self._status;
 
                     if (status === STATUS_PENDING) {
 
-                        if (typeof onrejected === 'function') {
+                        if (isFn(onrejected)) {
                             self._onrejected.push(function (reason) {
                                 try {
                                     onrejected(reason);
@@ -98,7 +100,7 @@ patch(window, 'Promise', createClass(
                             });
                         }
 
-                        if (typeof onresolved === 'function') {
+                        if (isFn(onresolved)) {
                             self._onresolved.push(function (data) {
                                 try {
                                     resolve(onresolved(data));
@@ -120,8 +122,8 @@ patch(window, 'Promise', createClass(
 
                     } else if (status === STATUS_RESOLVED) {
 
-                        if (typeof onresolved === 'function') {
-                            setTimeout(function () {
+                        if (isFn(onresolved)) {
+                            delay(function () {
                                 try {
                                     resolve(onresolved(self._value));
                                 } catch (error) {
@@ -134,9 +136,9 @@ patch(window, 'Promise', createClass(
 
                     } else {
 
-                        if (typeof onrejected === 'function') {
+                        if (isFn(onrejected)) {
                             self._hasErrorHandled = true;
-                            setTimeout(function () {
+                            delay(function () {
                                 try {
                                     onrejected(self._value);
                                     resolve();
@@ -163,10 +165,12 @@ patch(window, 'Promise', createClass(
     }
 ));
 
-patchSome(Promise, {
+Pro = Promise;
+
+patchSome(Pro, {
 
     race: function (promises) {
-        return new Promise(function (resolve, reject) {
+        return new Pro(function (resolve, reject) {
             promises.forEach(function (promise) {
                 promise.then(resolve, reject);
             });
@@ -174,7 +178,7 @@ patchSome(Promise, {
     },
 
     all: function (promises) {
-        return new Promise(function (resolve, reject) {
+        return new Pro(function (resolve, reject) {
 
             var rest = promises.length,
                 results = new Array(rest);
@@ -192,20 +196,20 @@ patchSome(Promise, {
     },
 
     resolve: function (data) {
-        return data instanceof Promise ? data : new Promise(function (resolve) {
+        return data instanceof Pro ? data : new Pro(function (resolve) {
             resolve(data);
         });
     },
 
     reject: function (reason) {
-        return new Promise(function (resolve, reject) {
+        return new Pro(function (resolve, reject) {
             reject(reason);
         });
     }
 
 });
 
-patch(Promise.prototype, 'finally', function (callback) {
+patch(Pro.prototype, 'finally', function (callback) {
     this.then(function (data) {
         callback();
         return data;
