@@ -1,3 +1,12 @@
+## 0.5.0 - 2018-11-03
+
+- Add `Object.keys` 
+- Add `Object.values` 
+- Add `Object.entries`
+- Add `array.keys` 
+- Add `array.values` 
+- Add `array.entries`
+
 ## 0.4.0 - 2018-10-26
 
 - Add iterator support

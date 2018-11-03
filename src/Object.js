@@ -14,11 +14,9 @@ patchSome(Obj, {
                 return;
             }
 
-            for (var key in src) {
-                if (src.hasOwnProperty(key)) {
-                    target[key] = src[key];
-                }
-            }
+            Object.keys(src).forEach(function (key) {
+                target[key] = src[key];
+            });
 
         });
 
@@ -32,6 +30,28 @@ patchSome(Obj, {
         } else {
             return value1 !== value1 && value2 !== value2;
         }
+    },
+
+    keys: function (object) {
+        var result = [];
+        for (var key in object) {
+            if (object.hasOwnProperty(key)) {
+                result.push(key);
+            }
+        }
+        return result;
+    },
+
+    values: function (object) {
+        return Object.keys(object).map(function (key) {
+            return object[key];
+        });
+    },
+
+    entries: function (object) {
+        return Object.keys(object).map(function (key) {
+            return [key, object[key]];
+        });
     }
 
 });

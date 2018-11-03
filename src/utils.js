@@ -40,9 +40,9 @@ export var createClass = function (constructor, prototype) {
         Obj.defineProperty(
             constructor.prototype,
             key,
-            desc.value ?
-                { configurable: true, writable: true, value: desc.value } :
-                { configurable: true, get: desc.get }
+            desc.get ?
+                { configurable: true, get: desc.get } :
+                { configurable: true, writable: true, value: desc.value }
         );
     }
     return constructor;

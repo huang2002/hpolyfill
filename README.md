@@ -39,9 +39,15 @@ This is a lightweight(less than 10KB after minimization) polyfill lib which only
     - `array.flat()`
     - `array.flatMap()`
     - `array[Symbol.iterator]()`
+    - `array.keys()`
+    - `array.values()`
+    - `array.entries()`
 - Object
     - `Object.assign()`
     - `Object.is()`
+    - `Object.keys()`
+    - `Object.values()`
+    - `Object.entries()`
 - Number
     - `Number.isNaN()`
     - `Number.isFinite()`
@@ -54,7 +60,7 @@ This is a lightweight(less than 10KB after minimization) polyfill lib which only
     - `string.padStart()`
     - `string.padEnd()`
     - `string[Symbol.iterator]()`
-- `Symbol`
+- Symbol
     - basic functionality
     - `Symbol.for()`
     - `Symbol.keyFor()`

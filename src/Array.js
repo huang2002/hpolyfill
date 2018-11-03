@@ -46,6 +46,18 @@ patchSome(Arr, {
 
 });
 
+export var arrIter = function () {
+    var index = 0,
+        self = this;
+    return {
+        next: function () {
+            return index < self.length ?
+                { value: self[index++], done: false } :
+                { value: none, done: true };
+        }
+    };
+};
+
 patchSome(ArrProto, {
 
     includes: function (element) {
@@ -132,20 +144,34 @@ patchSome(ArrProto, {
 
     flatMap: function (callback) {
         return this.map(callback, arguments[1]).flat();
+    },
+
+    keys: function () {
+        var self = this,
+            index = 0;
+        return {
+            next: function () {
+                return index < self.length ?
+                    { value: index++, done: false } :
+                    { value: undefined, done: true };
+            }
+        };
+    },
+
+    values: arrIter,
+
+    entries: function () {
+        var self = this,
+            index = -1;
+        return {
+            next: function () {
+                return ++index < self.length ?
+                    { value: [index, self[index]], done: false } :
+                    { value: undefined, done: true };
+            }
+        };
     }
 
 });
-
-export var arrIter = function () {
-    var index = 0,
-        self = this;
-    return {
-        next: function () {
-            return index < self.length ?
-                { value: self[index++], done: false } :
-                { value: none, done: true };
-        }
-    };
-};
 
 patch(ArrProto, ITER_SYM, arrIter);

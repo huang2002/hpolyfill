@@ -15,15 +15,17 @@ function assert(actual, expected) {
         console.trace(stringify(expected) + ' actual->' + stringify(actual));
     }
 }
-function iterable2array(iterable) {
-    var iterator = iterable[Symbol.iterator](),
-        result = [],
+function iterate(iterator) {
+    var result = [],
         t = iterator.next();
     while (!t.done) {
         result.push(t.value);
         t = iterator.next();
-    }
+    };
     return result;
+}
+function iterable2array(iterable) {
+    return iterate(iterable[Symbol.iterator]());
 }
 let o, t;
 
@@ -43,6 +45,14 @@ assert(o, t);
 assert(t.temp);
 assert(t.mode, 'test');
 assert(t.test, undefined);
+assert(Object.keys({ a: 0, b: 1, c: 2 }).sort().join(''), 'abc');
+assert(Object.values({ a: 'd', b: 'e', c: 'f' }).sort().join(''), 'def');
+assert(
+    Object.entries({ a: 'd', b: 'e', c: 'f' })
+        .map(function (a) { return a.join(''); })
+        .sort().join(''),
+    'adbecf'
+);
 
 // Number
 assert(Number.isNaN(NaN));
@@ -108,10 +118,13 @@ assert(Symbol.for('test') === Symbol.for('test'));
 assert(Symbol.keyFor(Symbol.for('test')), 'test');
 assert(Symbol.keyFor(Symbol.for({ toString: function () { return 'foo'; } })), 'foo');
 
-// iterator
+// iterators
 assert(iterable2array([0, 1, 2]).join(), '0,1,2');
 assert(iterable2array(new Set([0, 1, 2])).join(), '0,1,2');
 assert(iterable2array(new Map([[0, 1], [2, 3]])).join(';'), '0,1;2,3');
+assert(iterate([3, 4, 5].keys()).join(''), '012');
+assert(iterate([3, 4, 5].values()).join(''), '345');
+assert(iterate([3, 4, 5].entries()).join(';'), '0,3;1,4;2,5');
 
 // Promise
 function resolveLater(data, delay) {
@@ -148,7 +161,7 @@ p.then(function (data) {
 });
 setTimeout(function () {
     assert(finallyHasCalled);
-}, 1000);
+}, 2000);
 const testData = 'test data',
     testValue = 'test value',
     testReason = 'test reason';
