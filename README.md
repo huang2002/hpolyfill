@@ -65,6 +65,9 @@ This is a lightweight(less than 10KB after minimization) polyfill lib which only
     - `Symbol.for()`
     - `Symbol.keyFor()`
     - `Symbol.iterator`
+- RAF
+    - `requestAnimationFrame()`
+    - `cancelAnimationFrame()`
 
 # ps
 

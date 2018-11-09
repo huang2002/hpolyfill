@@ -1,6 +1,6 @@
-import { patch, patchSome, findIndex, Str } from "./utils";
+import { patch, patchSome, findIndex, Str, win } from "./utils";
 
-patch(window, 'Symbol', function () {
+patch(win, 'Symbol', function () {
     var tag = arguments.length > 0 ? arguments[0] : '';
     return '@@' + tag + '-' + Math.random().toString(32).slice(2);
 });

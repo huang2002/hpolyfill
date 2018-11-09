@@ -1,7 +1,7 @@
-import { test, patch, createClass, checkThis, findIndex, Arr, none, isFn } from "./utils";
+import { test, patch, createClass, checkThis, findIndex, win, Arr, none, isFn } from "./utils";
 import { ITER_SYM } from "./Symbol";
 
-test(window, 'Map', function (Map) {
+test(win, 'Map', function (Map) {
     var map = new Map([[-0, 1], [+0, 1]]);
     return isFn(map.forEach) && map.size === 1 && map.set(1, 2) === map && isFn(map[ITER_SYM]);
 });
@@ -92,7 +92,7 @@ MapProto[ITER_SYM] = {
     }
 };
 
-patch(window, 'Map', createClass(
+patch(win, 'Map', createClass(
     function Map() {
         checkThis(this, Map);
 

@@ -1,3 +1,7 @@
+## 0.6.0 - 2018-11-09
+
+- Add RAF polyfills
+
 ## 0.5.0 - 2018-11-03
 
 - Add `Object.keys` 

@@ -216,3 +216,12 @@ Promise.race([
 }, function (reason) {
     assert(reason, fastReason);
 });
+
+// RAF
+let flagRAF = false;
+requestAnimationFrame(function () {
+    flagRAF = true;
+});
+setTimeout(function () {
+    assert(flagRAF);
+}, 1000);

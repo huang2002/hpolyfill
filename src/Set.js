@@ -1,7 +1,7 @@
-import { test, patch, createClass, checkThis, findIndex, Arr, Obj, isFn } from "./utils";
+import { test, patch, createClass, checkThis, findIndex, Arr, Obj, isFn, win } from "./utils";
 import { ITER_SYM } from "./Symbol";
 
-test(window, 'Set', function (Set) {
+test(win, 'Set', function (Set) {
     var set = new Set([-0, +0]);
     return isFn(set.forEach) && set.size === 1 && set.add(1) === set && isFn(set[ITER_SYM]);
 });
@@ -68,7 +68,7 @@ SetProto[ITER_SYM] = {
     }
 };
 
-patch(window, 'Set', createClass(
+patch(win, 'Set', createClass(
     function Set() {
         checkThis(this, Set);
 

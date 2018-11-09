@@ -1,4 +1,5 @@
-export var Obj = Object,
+export var win = window,
+    Obj = Object,
     Arr = Array,
     ArrProto = Arr.prototype,
     Str = String,
@@ -6,6 +7,7 @@ export var Obj = Object,
     Num = Number,
     TypeErr = TypeError,
     delay = setTimeout,
+    clearDelay = clearTimeout,
     none = undefined;
 
 export var isFn = function (value) {

@@ -1,4 +1,4 @@
-import { patch, patchSome, createClass, checkThis, delay, none, isFn } from "./utils";
+import { patch, patchSome, createClass, checkThis, delay, none, isFn, win } from "./utils";
 
 var STATUS_PENDING = 'pending',
     STATUS_RESOLVED = 'resolved',
@@ -6,7 +6,7 @@ var STATUS_PENDING = 'pending',
 
 var Pro;
 
-patch(window, 'Promise', createClass(
+patch(win, 'Promise', createClass(
     function Promise(executor) {
         checkThis(this, Pro);
 
