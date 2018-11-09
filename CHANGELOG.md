@@ -1,3 +1,7 @@
+## 0.7.0 - 2018-11-09
+
+- Add `performance.now()`
+
 ## 0.6.0 - 2018-11-09
 
 - Add RAF polyfills

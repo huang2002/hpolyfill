@@ -68,6 +68,8 @@ This is a lightweight(less than 10KB after minimization) polyfill lib which only
 - RAF
     - `requestAnimationFrame()`
     - `cancelAnimationFrame()`
+- Performance
+    - `performance.now()`
 
 # ps
 
