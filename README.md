@@ -1,6 +1,17 @@
 # HPolyfill
 
-This is a lightweight(less than 10KB after minimization) polyfill lib which only includes some common polyfills:
+This is a lightweight(less than 10KB after minimization) polyfill lib which includes some common polyfills.
+
+## Usage
+
+You can just simply include it in your HTML file to get the polyfills:
+
+```html
+<script type="text/javascript" crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/hpolyfill@latest/dist/index.js"></script>
+<script type="text/javascript" crossorigin="anonymous" src="https://unpkg.com/hpolyfill@latest/dist/index.js"></script>
+```
+
+## Polyfill list
 
 - Set
     - basic functionality
@@ -38,10 +49,10 @@ This is a lightweight(less than 10KB after minimization) polyfill lib which only
     - `array.findIndex()`
     - `array.flat()`
     - `array.flatMap()`
-    - `array[Symbol.iterator]()`
     - `array.keys()`
     - `array.values()`
     - `array.entries()`
+    - `array[Symbol.iterator]()`
 - Object
     - `Object.assign()`
     - `Object.is()`
@@ -71,6 +82,6 @@ This is a lightweight(less than 10KB after minimization) polyfill lib which only
 - Performance
     - `performance.now()`
 
-# ps
+## ps
 
 If you find any problem or something necessary not included in this lib, feel free to open an issue.

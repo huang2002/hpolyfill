@@ -1,3 +1,7 @@
+### 0.7.1 - 2018-11-30
+
+- Improve `README.md`
+
 ## 0.7.0 - 2018-11-09
 
 - Add `performance.now()`
