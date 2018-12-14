@@ -1,3 +1,8 @@
+## 0.8.0 - 2018-12-14
+
+- Add `NaN` support in `array.indexOf()`
+- Improve some internals
+
 ### 0.7.1 - 2018-11-30
 
 - Improve `README.md`

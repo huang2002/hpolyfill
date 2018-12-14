@@ -1,4 +1,4 @@
-import { patch, patchSome, findIndex, Str, win } from "./utils";
+import { patch, patchSome, Str, win } from "./utils";
 
 patch(win, 'Symbol', function () {
     var tag = arguments.length > 0 ? arguments[0] : '';
@@ -14,8 +14,8 @@ patchSome(Sym, {
 
     for: function (key) {
         key = Str(key);
-        var index = findIndex(keys, key);
-        if (index >= 0) {
+        var index = keys.indexOf(key);
+        if (~index) {
             return symbols[index];
         } else {
             var symbol = Sym(key);
@@ -26,8 +26,8 @@ patchSome(Sym, {
     },
 
     keyFor: function (symbol) {
-        var index = findIndex(symbols, symbol);
-        if (index >= 0) {
+        var index = symbols.indexOf(symbol);
+        if (~index) {
             return keys[index];
         }
     }

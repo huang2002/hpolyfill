@@ -43,6 +43,7 @@ You can just simply include it in your HTML file to get the polyfills:
 - Array
     - `Array.from()`
     - `Array.of()`
+    - `array.indexOf()` supports `NaN`
     - `array.includes()`
     - `array.fill()`
     - `array.find()`

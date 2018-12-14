@@ -8,6 +8,7 @@ export var win = window,
     TypeErr = TypeError,
     delay = setTimeout,
     clearDelay = clearTimeout,
+    nan = NaN,
     none = undefined;
 
 export var isFn = function (value) {
@@ -66,9 +67,3 @@ export var test = function (target, name, tester) {
         delete target[name];
     }
 }
-
-export var findIndex = function (array, element) {
-    return array.findIndex(function (ele) {
-        return ele === element || ele !== ele && element !== element;
-    });
-};

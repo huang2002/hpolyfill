@@ -69,6 +69,7 @@ assert(Number.isFinite('not finite'), false);
 assert(Array.from([0, 1]).join(), '0,1');
 
 // array
+assert([NaN].indexOf(NaN), 0);
 assert([0].includes(-0));
 assert([NaN].includes(NaN));
 assert([NaN].includes(NaN, 1), false);

@@ -1,4 +1,4 @@
-import { patch, patchSome, check, pick, Arr, ArrProto, none } from "./utils";
+import { patch, patchSome, check, pick, Arr, ArrProto, none, test, Obj, nan } from "./utils";
 import { ITER_SYM } from "./Symbol";
 
 patchSome(Arr, {
@@ -58,18 +58,27 @@ export var arrIter = function () {
     };
 };
 
+test(ArrProto, 'indexOf', function (indexOf) {
+    return !indexOf.call([nan], nan);
+});
+
 patchSome(ArrProto, {
 
-    includes: function (element) {
+    indexOf: function (element) {
         var length = this.length,
-            ele;
+            ele,
+            elementIsNaN = element !== element;
         for (var i = pick(arguments[1], 0); i < length; i++) {
             ele = this[i];
-            if (ele === element || ele !== ele && element !== element) {
-                return true;
+            if (ele === element || elementIsNaN && ele !== ele) {
+                return i;
             }
         }
-        return false;
+        return -1;
+    },
+
+    includes: function (element) {
+        return !!~this.indexOf(element, arguments[1]);
     },
 
     find: function (predicate) {

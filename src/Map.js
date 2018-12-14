@@ -1,4 +1,4 @@
-import { test, patch, createClass, checkThis, findIndex, win, Arr, none, isFn } from "./utils";
+import { test, patch, createClass, checkThis, win, Arr, none, isFn, Obj } from "./utils";
 import { ITER_SYM } from "./Symbol";
 
 test(win, 'Map', function (Map) {
@@ -16,27 +16,27 @@ var MapProto = {
 
     has: {
         value: function (key) {
-            return findIndex(this._keys, key) >= 0;
+            return this._keys.includes(key);
         }
     },
 
     get: {
         value: function (key) {
-            var index = findIndex(this._keys, key);
-            return index >= 0 ? this._values[index] : none;
+            var index = this._keys.indexOf(key);
+            return ~index ? this._values[index] : none;
         }
     },
 
     set: {
         value: function (key, value) {
 
-            if (Object.is(key, -0)) {
+            if (Obj.is(key, -0)) {
                 key = +0;
             }
 
-            var index = findIndex(this._keys, key);
+            var index = this._keys.indexOf(key);
 
-            if (index >= 0) {
+            if (~index) {
                 this._values[index] = value;
             } else {
                 this._keys.push(key);
@@ -50,8 +50,8 @@ var MapProto = {
 
     delete: {
         value: function (key) {
-            var index = findIndex(this._keys, key);
-            if (index >= 0) {
+            var index = this._keys.indexOf(key);
+            if (!~index) {
                 this._keys.splice(index, 1);
                 this._values.splice(index, 1);
             }

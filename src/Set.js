@@ -1,4 +1,4 @@
-import { test, patch, createClass, checkThis, findIndex, Arr, Obj, isFn, win } from "./utils";
+import { test, patch, createClass, checkThis, Arr, Obj, isFn, win } from "./utils";
 import { ITER_SYM } from "./Symbol";
 
 test(win, 'Set', function (Set) {
@@ -16,7 +16,7 @@ var SetProto = {
 
     has: {
         value: function (element) {
-            return findIndex(this._values, element) >= 0;
+            return this._values.includes(element);
         }
     },
 
@@ -38,8 +38,8 @@ var SetProto = {
 
     delete: {
         value: function (element) {
-            var index = findIndex(this._values, element);
-            if (index >= 0) {
+            var index = this._values.indexOf(element);
+            if (!~index) {
                 this._values.splice(index, 1);
             }
             return this;

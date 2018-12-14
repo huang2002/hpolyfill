@@ -14,7 +14,7 @@ patchSome(Obj, {
                 return;
             }
 
-            Object.keys(src).forEach(function (key) {
+            Obj.keys(src).forEach(function (key) {
                 target[key] = src[key];
             });
 
@@ -43,13 +43,13 @@ patchSome(Obj, {
     },
 
     values: function (object) {
-        return Object.keys(object).map(function (key) {
+        return Obj.keys(object).map(function (key) {
             return object[key];
         });
     },
 
     entries: function (object) {
-        return Object.keys(object).map(function (key) {
+        return Obj.keys(object).map(function (key) {
             return [key, object[key]];
         });
     }
