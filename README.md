@@ -7,7 +7,9 @@ This is a lightweight(less than 10KB after minimization) polyfill lib which incl
 You can just simply include it in your HTML file to get the polyfills:
 
 ```html
+<!-- via jsdelivr -->
 <script type="text/javascript" crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/hpolyfill@latest/dist/index.js"></script>
+<!-- or via unpkg -->
 <script type="text/javascript" crossorigin="anonymous" src="https://unpkg.com/hpolyfill@latest/dist/index.js"></script>
 ```
 

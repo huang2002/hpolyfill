@@ -4,8 +4,6 @@ var PERF = 'performance';
 
 patch(win, PERF, {});
 
-export var perf = win[PERF];
-
-patch(perf, 'now', function () {
+patch(win[PERF], 'now', function () {
     return Date.now();
 });
