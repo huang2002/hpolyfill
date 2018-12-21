@@ -16,7 +16,7 @@ export var isFn = function (value) {
 };
 
 export var patch = function (target, name, polyfill) {
-    if (!isFn(target[name])) {
+    if (!target[name]) {
         Obj.defineProperty(target, name, {
             value: polyfill,
             configurable: true,

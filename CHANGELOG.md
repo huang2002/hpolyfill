@@ -1,3 +1,8 @@
+### 0.8.2 - 2018-12-21
+
+- Fix `performance.now()`
+- Fix some bugs
+
 ### 0.8.1 - 2018-12-21
 
 - Improve some internals

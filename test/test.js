@@ -226,3 +226,11 @@ requestAnimationFrame(function () {
 setTimeout(function () {
     assert(flagRAF);
 }, 1000);
+
+// Performance
+const perfTiming0 = performance.now(),
+    perfTestDelay = 1000,
+    perfTestAccept = 1000;
+setTimeout(function () {
+    assert(Math.abs(performance.now() - perfTiming0 - perfTestDelay) < perfTestAccept);
+}, perfTestDelay);
