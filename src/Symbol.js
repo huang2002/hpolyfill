@@ -1,8 +1,15 @@
 import { patch, patchSome, Str, win } from "./utils";
 
-patch(win, 'Symbol', function () {
+var SYMBOL = 'Symbol';
+
+patch(win, SYMBOL, function () {
     var tag = arguments.length > 0 ? arguments[0] : '';
-    return '@@' + tag + '-' + Math.random().toString(32).slice(2);
+    return {
+        constructor: Sym,
+        toString: function () {
+            return SYMBOL + '(' + tag + ')';
+        }
+    };
 });
 
 var Sym = Symbol;

@@ -1,9 +1,12 @@
 "use strict";
+
 const outputEle = document.getElementById('output'),
     stringify = JSON.stringify;
+
 function print(type, msg) {
     outputEle.innerHTML += '<li class="' + type + '">' + msg + '</li>';
 }
+
 function assert(actual, expected) {
     if (arguments.length < 2) {
         expected = true;
@@ -15,6 +18,7 @@ function assert(actual, expected) {
         console.trace(stringify(expected) + ' actual->' + stringify(actual));
     }
 }
+
 function iterate(iterator) {
     var result = [],
         t = iterator.next();
@@ -24,9 +28,11 @@ function iterate(iterator) {
     };
     return result;
 }
+
 function iterable2array(iterable) {
     return iterate(iterable[Symbol.iterator]());
 }
+
 let o, t;
 
 // Object
@@ -113,6 +119,13 @@ assert('test'.padEnd(6, 'abc'), 'test' + 'ab');
 assert('test'.padEnd(8, 'abc'), 'test' + 'abca');
 
 // Symbol
+function typeOf(v) {
+    const type = typeof v;
+    return v && type === 'object' && v.constructor === Symbol && v !== Symbol.prototype ?
+        'symbol' : type;
+}
+assert(typeOf(Symbol('test')), 'symbol');
+assert(String(Symbol('test')), 'Symbol(test)');
 assert(Symbol('test') !== Symbol('test'));
 assert(Symbol('test') !== Symbol.for('test'));
 assert(Symbol.for('test') === Symbol.for('test'));
