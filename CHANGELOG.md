@@ -1,3 +1,7 @@
+## 0.9.0 - 2019-01-04
+
+- Improve `Symbol()` polyfill
+
 ### 0.8.2 - 2018-12-21
 
 - Fix `performance.now()`
