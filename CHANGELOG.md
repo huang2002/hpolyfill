@@ -1,3 +1,8 @@
+## 0.11.0 - 2019-01-17
+
+- Improve some internals
+- Fix `README.md`
+
 ## 0.10.0 - 2019-01-17
 
 - Add iterable objects support to `Array.from()`

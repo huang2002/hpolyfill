@@ -4,7 +4,7 @@ This is a lightweight(less than 10KB) polyfill lib which includes some common po
 
 ## Usage
 
-Just simply include on of the following script tags in your HTML to get the polyfills:
+Just simply include one of the following script tags in your HTML to get the polyfills:
 
 ```html
 <!-- via jsdelivr -->
@@ -12,6 +12,8 @@ Just simply include on of the following script tags in your HTML to get the poly
 <!-- or via unpkg -->
 <script type="text/javascript" crossorigin="anonymous" src="https://unpkg.com/hpolyfill@latest/dist/index.js"></script>
 ```
+
+By the way, as a polyfill lib, this lib should be loaded first in most cases.
 
 ## Polyfill list
 
