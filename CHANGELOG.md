@@ -1,3 +1,7 @@
+## 0.12.0 - 2019-01-17
+
+- Improve some object methods
+
 ## 0.11.0 - 2019-01-17
 
 - Improve some internals
