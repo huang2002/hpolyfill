@@ -73,6 +73,9 @@ assert(Number.isFinite('not finite'), false);
     assert(Array.from(arguments).join(), '0,1');
 })(0, 1);
 assert(Array.from([0, 1]).join(), '0,1');
+assert(Array.from('abcd').join(), 'a,b,c,d');
+assert(Array.from(new Set([2, 0, 1, 9])).join(), '2,0,1,9');
+assert(Array.from(new Map([[2, 0], [1, 9]])).join(';'), '2,0;1,9');
 
 // array
 assert([NaN].indexOf(NaN), 0);
@@ -153,7 +156,7 @@ const dataY = 'data-y',
     dataResolve = 'data-resolve',
     dataReject = 'data-reject';
 let p = resolveLater(dataY, 100),
-    finallyHasCalled = false;
+    finallyHasBeenCalled = false;
 p.then(function (data) {
     assert(data, dataY);
     return dataThen;
@@ -171,10 +174,10 @@ p.then(function (data) {
     assert(err, dataReject);
 }).finally(function (finallyData) {
     assert(finallyData, undefined);
-    finallyHasCalled = true;
+    finallyHasBeenCalled = true;
 });
 setTimeout(function () {
-    assert(finallyHasCalled);
+    assert(finallyHasBeenCalled);
 }, 2000);
 const testData = 'test data',
     testValue = 'test value',

@@ -1,16 +1,16 @@
-import { patch, win, delay, clearDelay, test } from "./utils";
+import { patch, _window, _setTimeout, _clearTimeout, test } from "./utils";
 
 var RAF = 'requestAnimationFrame',
     CAF = 'cancelAnimationFrame';
 
-test(win, RAF, function () {
-    return win[CAF];
+test(_window, RAF, function () {
+    return _window[CAF];
 });
 
-patch(win, CAF, win.webkitCancelAnimationFrame || function (id) {
-    clearDelay(id);
+patch(_window, CAF, _window.webkitCancelAnimationFrame || function (id) {
+    _clearTimeout(id);
 });
 
-patch(win, RAF, win.webkitRequestAnimationFrame || function (callback) {
-    return delay(callback, 15);
+patch(_window, RAF, _window.webkitRequestAnimationFrame || function (callback) {
+    return _setTimeout(callback, 15);
 });

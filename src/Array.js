@@ -1,7 +1,7 @@
-import { patch, patchSome, check, pick, Arr, ArrProto, none, test, Obj, nan } from "./utils";
-import { ITER_SYM } from "./Symbol";
+import { patch, patchSome, check, pick, _Array, _ArrayPrototype, _undefined, test, _Object, _NaN, isFn, isType } from "./utils";
+import { SYMBOL_ITERATOR } from "./Symbol";
 
-patchSome(Arr, {
+patchSome(_Array, {
 
     from: function (arrayLike) {
 
@@ -12,7 +12,7 @@ patchSome(Arr, {
             mapFn = args[1],
             thisArg = args[2];
 
-        if (Arr.isArray(arrayLike)) {
+        if (_Array.isArray(arrayLike)) {
 
             result = arrayLike.slice();
 
@@ -22,16 +22,23 @@ patchSome(Arr, {
                 });
             }
 
+        } else if (isFn(arrayLike[SYMBOL_ITERATOR])) {
+
+            var next = arrayLike[SYMBOL_ITERATOR]().next,
+                iterResult;
+
+            while (!(iterResult = next()).done) {
+                result.push(iterResult.value);
+            }
+
         } else {
 
             var length = arrayLike.length;
 
-            if (typeof length === 'number') {
-
+            if (isType(length, 'number')) {
                 for (var i = 0; i < length; i++) {
                     result.push(mapFn ? mapFn.call(thisArg, arrayLike[i], i) : arrayLike[i]);
                 }
-
             }
 
         }
@@ -41,7 +48,7 @@ patchSome(Arr, {
     },
 
     of: function () {
-        return Arr.from(arguments);
+        return _Array.from(arguments);
     }
 
 });
@@ -53,16 +60,16 @@ export var arrIter = function () {
         next: function () {
             return index < self.length ?
                 { value: self[index++], done: false } :
-                { value: none, done: true };
+                { value: _undefined, done: true };
         }
     };
 };
 
-test(ArrProto, 'indexOf', function (indexOf) {
-    return !indexOf.call([nan], nan);
+test(_ArrayPrototype, 'indexOf', function (indexOf) {
+    return !indexOf.call([_NaN], _NaN);
 });
 
-patchSome(ArrProto, {
+patchSome(_ArrayPrototype, {
 
     indexOf: function (element) {
         var length = this.length,
@@ -128,7 +135,7 @@ patchSome(ArrProto, {
             noArrays = true;
 
             source.forEach(function (element) {
-                if (Arr.isArray(element)) {
+                if (_Array.isArray(element)) {
                     noArrays = false;
                     element.forEach(function (ele) {
                         result.push(ele);
@@ -162,7 +169,7 @@ patchSome(ArrProto, {
             next: function () {
                 return index < self.length ?
                     { value: index++, done: false } :
-                    { value: undefined, done: true };
+                    { value: _undefined, done: true };
             }
         };
     },
@@ -176,11 +183,11 @@ patchSome(ArrProto, {
             next: function () {
                 return ++index < self.length ?
                     { value: [index, self[index]], done: false } :
-                    { value: undefined, done: true };
+                    { value: _undefined, done: true };
             }
         };
     }
 
 });
 
-patch(ArrProto, ITER_SYM, arrIter);
+patch(_ArrayPrototype, SYMBOL_ITERATOR, arrIter);

@@ -1,13 +1,15 @@
-import { patchSome, Num } from "./utils";
+import { patchSome, _Number, _window, isType } from "./utils";
 
-patchSome(Num, {
+var _isFinite = _window.isFinite;
+
+patchSome(_Number, {
 
     isNaN: function (value) {
         return value !== value;
     },
 
     isFinite: function (value) {
-        return typeof value === 'number' && isFinite(value);
+        return isType(value, 'number') && _isFinite(value);
     }
 
 });

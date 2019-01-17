@@ -1,44 +1,44 @@
-import { patch, patchSome, Str, win } from "./utils";
+import { patch, patchSome, _String, _window } from "./utils";
 
 var SYMBOL = 'Symbol';
 
-patch(win, SYMBOL, function () {
+patch(_window, SYMBOL, function () {
     var tag = arguments.length > 0 ? arguments[0] : '';
     return {
-        constructor: Sym,
+        constructor: _Symbol,
         toString: function () {
             return SYMBOL + '(' + tag + ')';
         }
     };
 });
 
-var Sym = Symbol;
+var _Symbol = Symbol;
 
-var keys = [],
-    symbols = [];
+var symbolRegistry_keys = [],
+    symbolRegistry_symbols = [];
 
-patchSome(Sym, {
+patchSome(_Symbol, {
 
     for: function (key) {
-        key = Str(key);
-        var index = keys.indexOf(key);
+        key = _String(key);
+        var index = symbolRegistry_keys.indexOf(key);
         if (~index) {
-            return symbols[index];
+            return symbolRegistry_symbols[index];
         } else {
-            var symbol = Sym(key);
-            keys.push(key);
-            symbols.push(symbol);
+            var symbol = _Symbol(key);
+            symbolRegistry_keys.push(key);
+            symbolRegistry_symbols.push(symbol);
             return symbol;
         }
     },
 
     keyFor: function (symbol) {
-        var index = symbols.indexOf(symbol);
+        var index = symbolRegistry_symbols.indexOf(symbol);
         if (~index) {
-            return keys[index];
+            return symbolRegistry_keys[index];
         }
     }
 
 });
 
-export var ITER_SYM = Sym.iterator || (Sym.iterator = Sym('Symbol.iterator'));
+export var SYMBOL_ITERATOR = _Symbol.iterator || (_Symbol.iterator = _Symbol('Symbol.iterator'));

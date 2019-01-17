@@ -1,14 +1,14 @@
-import { patch, patchSome, pick, check, Arr, Str, StrProto, Num } from "./utils";
-import { ITER_SYM } from "./Symbol";
+import { patch, patchSome, pick, check, _Array, _String, _StringPrototype, _Number, _RangeError } from "./utils";
+import { SYMBOL_ITERATOR } from "./Symbol";
 import { arrIter } from "./Array";
 
-patch(Str, 'raw', function (template) {
+patch(_String, 'raw', function (template) {
 
     check(template);
 
     var args = arguments,
         substitutionCount = args.length - 1,
-        fragments = Arr.from(template.raw),
+        fragments = _Array.from(template.raw),
         gapCount = fragments.length - 1;
 
     return fragments.reduce(function (chunk, frag, i) {
@@ -17,14 +17,14 @@ patch(Str, 'raw', function (template) {
 
 });
 
-patchSome(StrProto, {
+patchSome(_StringPrototype, {
 
     repeat: function (count) {
 
-        if (!Num.isFinite(count)) {
-            throw new RangeError('repeat count must be infinite');
+        if (!_Number.isFinite(count)) {
+            throw new _RangeError('repeat count must be infinite');
         } else if (count < 0) {
-            throw new RangeError('repeat count must be non-negative');
+            throw new _RangeError('repeat count must be non-negative');
         }
 
         count <<= 0;
@@ -74,11 +74,11 @@ patchSome(StrProto, {
 
     padStart: function (length) {
 
-        var string = pick(arguments[1], ' '),
-            strLen = string.length,
-            padString = '';
+        var padStr = pick(arguments[1], ' '),
+            padStrLen = padStr.length,
+            padding = '';
 
-        if (strLen === 0) {
+        if (padStrLen === 0) {
             return this;
         }
 
@@ -86,20 +86,20 @@ patchSome(StrProto, {
             delta = length - this.length;
 
         while (delta >= 0) {
-            padString += (delta > strLen ? string : string.slice(0, delta));
-            delta -= strLen;
+            padding += (delta > padStrLen ? padStr : padStr.slice(0, delta));
+            delta -= padStrLen;
         }
 
-        return padString + result;
+        return padding + result;
 
     },
 
     padEnd: function (length) {
 
-        var string = pick(arguments[1], ' '),
-            strLen = string.length;
+        var padStr = pick(arguments[1], ' '),
+            padStrLen = padStr.length;
 
-        if (strLen === 0) {
+        if (padStrLen === 0) {
             return this;
         }
 
@@ -107,8 +107,8 @@ patchSome(StrProto, {
             delta = length - this.length;
 
         while (delta >= 0) {
-            result += delta > strLen ? string : string.slice(0, delta);
-            delta -= strLen;
+            result += delta > padStrLen ? padStr : padStr.slice(0, delta);
+            delta -= padStrLen;
         }
 
         return result;
@@ -117,4 +117,4 @@ patchSome(StrProto, {
 
 });
 
-patch(StrProto, ITER_SYM, arrIter);
+patch(_StringPrototype, SYMBOL_ITERATOR, arrIter);

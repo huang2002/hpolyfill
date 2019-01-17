@@ -1,23 +1,30 @@
-export var win = window,
-    Obj = Object,
-    Arr = Array,
-    ArrProto = Arr.prototype,
-    Str = String,
-    StrProto = Str.prototype,
-    Num = Number,
-    TypeErr = TypeError,
-    delay = setTimeout,
-    clearDelay = clearTimeout,
-    nan = NaN,
-    none = undefined;
+export var PROTOTYPE = 'prototype';
+
+export var _window = window,
+    _Object = Object,
+    _Array = Array,
+    _ArrayPrototype = _Array[PROTOTYPE],
+    _String = String,
+    _StringPrototype = _String[PROTOTYPE],
+    _Number = Number,
+    _TypeError = TypeError,
+    _RangeError = RangeError,
+    _setTimeout = setTimeout,
+    _clearTimeout = clearTimeout,
+    _NaN = NaN,
+    _undefined = undefined;
+
+export var isType = function (value, type) {
+    return typeof value === type;
+};
 
 export var isFn = function (value) {
-    return typeof value === 'function';
+    return isType(value, 'function');
 };
 
 export var patch = function (target, name, polyfill) {
     if (!target[name]) {
-        Obj.defineProperty(target, name, {
+        _Object.defineProperty(target, name, {
             value: polyfill,
             configurable: true,
             writable: true
@@ -32,20 +39,20 @@ export var patchSome = function (target, map) {
 }
 
 export var check = function (value) {
-    if (value == none) {
-        throw new TypeErr('Cannot convert undefined or null to object');
+    if (value == _undefined) {
+        throw new _TypeError('Cannot convert undefined or null to object');
     }
 }
 
 export var createClass = function (constructor, prototype) {
     for (var key in prototype) {
         var desc = prototype[key];
-        Obj.defineProperty(
-            constructor.prototype,
+        _Object.defineProperty(
+            constructor[PROTOTYPE],
             key,
-            desc.get ?
+            (isType(desc, 'object') && desc.get) ?
                 { configurable: true, get: desc.get } :
-                { configurable: true, writable: true, value: desc.value }
+                { configurable: true, writable: true, value: desc }
         );
     }
     return constructor;
@@ -53,12 +60,12 @@ export var createClass = function (constructor, prototype) {
 
 export var checkThis = function (self, constructor) {
     if (!(self instanceof constructor)) {
-        throw new TypeErr('Cannot call a class as a function');
+        throw new _TypeError('Cannot call a class as a function');
     }
 }
 
 export var pick = function (value, standby) {
-    return value !== none ? value : standby;
+    return value !== _undefined ? value : standby;
 }
 
 export var test = function (target, name, tester) {

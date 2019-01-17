@@ -1,11 +1,11 @@
-import { patch, win } from "./utils";
+import { patch, _window } from "./utils";
 
-var PERF = 'performance';
+var PERFORMANCE = 'performance';
 
-patch(win, PERF, {});
+patch(_window, PERFORMANCE, {});
 
-var timingOffset = Date.now();
+var startTime = Date.now();
 
-patch(win[PERF], 'now', function () {
-    return (Date.now() - timingOffset) * 1000;
+patch(_window[PERFORMANCE], 'now', function () {
+    return (Date.now() - startTime) * 1000;
 });
