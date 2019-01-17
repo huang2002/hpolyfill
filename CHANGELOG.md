@@ -1,3 +1,9 @@
+## 0.10.0 - 2019-01-17
+
+- Add iterable objects support to `Array.from()`
+- Improve some internals
+- Improve docs
+
 ## 0.9.0 - 2019-01-04
 
 - Improve `Symbol()` polyfill
@@ -14,7 +20,7 @@
 
 ## 0.8.0 - 2018-12-14
 
-- Add `NaN` support in `array.indexOf()`
+- Add `NaN` support to `array.indexOf()`
 - Improve some internals
 
 ### 0.7.1 - 2018-11-30

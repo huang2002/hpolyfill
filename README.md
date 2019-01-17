@@ -1,10 +1,10 @@
 # HPolyfill
 
-This is a lightweight(less than 10KB after minimization) polyfill lib which includes some common polyfills.
+This is a lightweight(less than 10KB) polyfill lib which includes some common polyfills.
 
 ## Usage
 
-You can just simply include it in your HTML file to get the polyfills:
+Just simply include on of the following script tags in your HTML to get the polyfills:
 
 ```html
 <!-- via jsdelivr -->
@@ -18,8 +18,8 @@ You can just simply include it in your HTML file to get the polyfills:
 - Set
     - basic functionality
     - constructor arguments
-    - `set.add()` returns this
     - convert `-0` key into `+0`
+    - `set.add()` returning this
     - `set.forEach()`
     - `set.delete()`
     - `set.clear()`
@@ -28,8 +28,8 @@ You can just simply include it in your HTML file to get the polyfills:
 - Map
     - basic functionality
     - constructor arguments
-    - `map.set()` returns this
     - convert `-0` key into `+0`
+    - `map.set()` returning this
     - `map.forEach()`
     - `map.delete()`
     - `map.clear()`
@@ -45,7 +45,7 @@ You can just simply include it in your HTML file to get the polyfills:
 - Array
     - `Array.from()`
     - `Array.of()`
-    - `array.indexOf()` supports `NaN`
+    - `array.indexOf()` supporting `NaN`
     - `array.includes()`
     - `array.fill()`
     - `array.find()`
@@ -87,4 +87,4 @@ You can just simply include it in your HTML file to get the polyfills:
 
 ## ps
 
-If you find any problem or something necessary not included in this lib, feel free to open an issue.
+If you find any problem with this lib or something necessary but not included, feel free to open an issue.
