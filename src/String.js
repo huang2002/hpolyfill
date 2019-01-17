@@ -1,6 +1,6 @@
 import { patch, patchSome, pick, check, _Array, _String, _StringPrototype, _Number, _RangeError } from "./utils";
 import { SYMBOL_ITERATOR } from "./Symbol";
-import { arrIter } from "./Array";
+import { arrayIterator } from "./Array";
 
 patch(_String, 'raw', function (template) {
 
@@ -117,4 +117,4 @@ patchSome(_StringPrototype, {
 
 });
 
-patch(_StringPrototype, SYMBOL_ITERATOR, arrIter);
+patch(_StringPrototype, SYMBOL_ITERATOR, arrayIterator);

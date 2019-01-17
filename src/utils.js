@@ -29,6 +29,9 @@ export var patch = function (target, name, polyfill) {
             configurable: true,
             writable: true
         });
+        return polyfill;
+    } else {
+        return target[name];
     }
 }
 

@@ -2,7 +2,7 @@ import { patch, patchSome, _String, _window } from "./utils";
 
 var SYMBOL = 'Symbol';
 
-patch(_window, SYMBOL, function () {
+var _Symbol = patch(_window, SYMBOL, function () {
     var tag = arguments.length > 0 ? arguments[0] : '';
     return {
         constructor: _Symbol,
@@ -11,8 +11,6 @@ patch(_window, SYMBOL, function () {
         }
     };
 });
-
-var _Symbol = Symbol;
 
 var symbolRegistry_keys = [],
     symbolRegistry_symbols = [];

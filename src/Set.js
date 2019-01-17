@@ -6,7 +6,7 @@ test(_window, 'Set', function (Set) {
     return isFn(set.forEach) && isFn(set[SYMBOL_ITERATOR]) && set.size === 1 && set.add(1) === set;
 });
 
-patch(_window, 'Set', createClass(
+var _Set = patch(_window, 'Set', createClass(
     function Set() {
         checkThis(this, Set);
 
@@ -66,7 +66,7 @@ patch(_window, 'Set', createClass(
     }
 ));
 
-patch(_window.Set[PROTOTYPE], SYMBOL_ITERATOR, function () {
+patch(_Set[PROTOTYPE], SYMBOL_ITERATOR, function () {
     var values = [];
     this.forEach(function (value) {
         values.push(value);

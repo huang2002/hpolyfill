@@ -6,7 +6,7 @@ test(_window, 'Map', function (Map) {
     return isFn(map.forEach) && isFn(map[SYMBOL_ITERATOR]) && map.size === 1 && map.set(1, 2) === map;
 });
 
-patch(_window, 'Map', createClass(
+var _Map = patch(_window, 'Map', createClass(
     function Map() {
         checkThis(this, Map);
 
@@ -81,7 +81,7 @@ patch(_window, 'Map', createClass(
     }
 ));
 
-patch(_window.Map[PROTOTYPE], SYMBOL_ITERATOR, function () {
+patch(_Map[PROTOTYPE], SYMBOL_ITERATOR, function () {
     var pairs = [];
     this.forEach(function (value, key) {
         pairs.push([key, value]);

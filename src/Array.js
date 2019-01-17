@@ -53,7 +53,7 @@ patchSome(_Array, {
 
 });
 
-export var arrIter = function () {
+export var arrayIterator = function () {
     var index = 0,
         self = this;
     return {
@@ -174,7 +174,7 @@ patchSome(_ArrayPrototype, {
         };
     },
 
-    values: arrIter,
+    values: arrayIterator,
 
     entries: function () {
         var self = this,
@@ -190,4 +190,4 @@ patchSome(_ArrayPrototype, {
 
 });
 
-patch(_ArrayPrototype, SYMBOL_ITERATOR, arrIter);
+patch(_ArrayPrototype, SYMBOL_ITERATOR, arrayIterator);
