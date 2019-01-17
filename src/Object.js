@@ -1,4 +1,4 @@
-import { patchSome, check, _Object, _Array, PROTOTYPE } from "./utils";
+import { patchSome, check, _Object, _Array, PROTOTYPE, isType } from "./utils";
 
 var _hasOwnProperty = _Object[PROTOTYPE].hasOwnProperty;
 
@@ -12,7 +12,7 @@ patchSome(_Object, {
 
         _Array.from(arguments).forEach(function (src, i) {
 
-            if (i === 0) {
+            if (i === 0 || !src || !isType(src, 'object')) {
                 return;
             }
 
@@ -33,6 +33,7 @@ patchSome(_Object, {
     },
 
     keys: function (object) {
+        check(object);
         var result = [];
         for (var key in object) {
             if (_hasOwnProperty.call(object, key)) {
@@ -43,12 +44,14 @@ patchSome(_Object, {
     },
 
     values: function (object) {
+        check(object);
         return _Object.keys(object).map(function (key) {
             return object[key];
         });
     },
 
     entries: function (object) {
+        check(object);
         return _Object.keys(object).map(function (key) {
             return [key, object[key]];
         });

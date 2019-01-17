@@ -46,7 +46,7 @@ const testObject = new TestObject();
 o = {};
 t = Object.assign(o, {
     temp: true
-}, testObject);
+}, undefined, null, testObject);
 assert(o, t);
 assert(t.temp);
 assert(t.mode, 'test');
