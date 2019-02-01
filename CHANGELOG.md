@@ -1,3 +1,8 @@
+### 0.12.1 - 2019-02-01
+
+- Fix `array.flat()`
+- Fix `performance`
+
 ## 0.12.0 - 2019-01-17
 
 - Improve some object methods
