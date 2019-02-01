@@ -1,5 +1,7 @@
 "use strict";
 
+// helpers
+
 const outputEle = document.getElementById('output'),
     stringify = JSON.stringify;
 
@@ -16,6 +18,9 @@ function assert(actual, expected) {
     } else {
         print('err', 'expect->' + stringify(expected) + ' actual->' + stringify(actual) + '</li>');
         console.trace(stringify(expected) + ' actual->' + stringify(actual));
+        if (arguments.length > 2) {
+            console.log(arguments[2]);
+        }
     }
 }
 
@@ -85,6 +90,7 @@ assert([NaN].includes(NaN, 1), false);
 assert([{}].includes({}), false);
 assert([0, 1, 2].fill(6).join(), '6,6,6');
 assert([0, 1, 2].fill(6, 1, 2).join(), '0,6,2');
+assert([0, [1, [2, 3]]].flat().join(';'), '0;1;2,3');
 assert([0, [1, 2], [[3]]].flat(Infinity).join(), '0,1,2,3');
 assert([0, [1, 2], [3]].flatMap(function (x) { return '' + x; }).join(' '), '0 1,2 3');
 assert([0, 2, 4].find(function (x) { return x > 1; }), 2);
@@ -243,7 +249,7 @@ setTimeout(function () {
     assert(flagRAF);
 }, 1000);
 
-// Performance
+// performance
 const perfTiming0 = performance.now(),
     perfTestDelay = 1000,
     perfTestAccept = 1000;

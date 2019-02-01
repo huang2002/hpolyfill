@@ -33,6 +33,12 @@
     <h1>Tests:</h1>
     <br />
     <ul id="output"></ul>
+    <script>
+        // clear
+        ['performance'].forEach(function (key) {
+            window[key] = undefined;
+        });
+    </script>
     <script src="../dist/index.js"></script>
     <script src="test.js"></script>
 </body>

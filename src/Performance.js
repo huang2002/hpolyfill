@@ -1,9 +1,9 @@
 import { patch, _window } from "./utils";
 
-var _Performance = patch(_window, 'Performance', {});
+var _performance = patch(_window, 'performance', {});
 
 var startTime = Date.now();
 
-patch(_Performance, 'now', function () {
+patch(_performance, 'now', function () {
     return (Date.now() - startTime) * 1000;
 });

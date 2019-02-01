@@ -124,7 +124,7 @@ patchSome(_ArrayPrototype, {
 
     flat: function () {
 
-        var result = [],
+        var result,
             source = this,
             depth = pick(arguments[0], 1);
 
@@ -132,6 +132,7 @@ patchSome(_ArrayPrototype, {
 
         for (var i = 0; i < depth; i++) {
 
+            result = [];
             noArrays = true;
 
             source.forEach(function (element) {
@@ -150,7 +151,6 @@ patchSome(_ArrayPrototype, {
             }
 
             source = result;
-            result = [];
 
         }
 
