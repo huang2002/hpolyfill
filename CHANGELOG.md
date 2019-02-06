@@ -1,3 +1,8 @@
+## 0.13.0 - 2019-02-06
+
+- Fix `array.indexOf()`
+- Fix `array.find()` & `array.findIndex()`
+
 ### 0.12.1 - 2019-02-01
 
 - Fix `array.flat()`
