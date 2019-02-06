@@ -83,7 +83,7 @@ assert(Array.from(new Set([2, 0, 1, 9])).join(), '2,0,1,9');
 assert(Array.from(new Map([[2, 0], [1, 9]])).join(';'), '2,0;1,9');
 
 // array
-assert([NaN].indexOf(NaN), 0);
+assert([NaN].indexOf(NaN), -1);
 assert([0].includes(-0));
 assert([NaN].includes(NaN));
 assert([NaN].includes(NaN, 1), false);

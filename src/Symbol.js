@@ -39,4 +39,4 @@ patchSome(_Symbol, {
 
 });
 
-export var SYMBOL_ITERATOR = _Symbol.iterator || (_Symbol.iterator = _Symbol('Symbol.iterator'));
+export var SYMBOL_ITERATOR = patch(_Symbol, 'iterator', _Symbol('Symbol.iterator'));

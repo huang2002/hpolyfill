@@ -47,7 +47,6 @@ By the way, as a polyfill lib, this lib should be loaded first in most cases.
 - Array
     - `Array.from()`
     - `Array.of()`
-    - `array.indexOf()` supporting `NaN`
     - `array.includes()`
     - `array.fill()`
     - `array.find()`

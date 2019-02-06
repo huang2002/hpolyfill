@@ -24,10 +24,11 @@ export var isFn = function (value) {
 
 export var patch = function (target, name, polyfill) {
     if (!target[name]) {
+        var isFnPolyfill = isFn(polyfill);
         _Object.defineProperty(target, name, {
             value: polyfill,
-            configurable: true,
-            writable: true
+            configurable: isFnPolyfill,
+            writable: isFnPolyfill
         });
         return polyfill;
     } else {

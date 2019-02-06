@@ -65,44 +65,31 @@ export var arrayIterator = function () {
     };
 };
 
-test(_ArrayPrototype, 'indexOf', function (indexOf) {
-    return !indexOf.call([_NaN], _NaN);
-});
-
 patchSome(_ArrayPrototype, {
 
-    indexOf: function (element) {
-        var length = this.length,
-            ele,
-            elementIsNaN = element !== element;
-        for (var i = pick(arguments[1], 0); i < length; i++) {
-            ele = this[i];
-            if (ele === element || elementIsNaN && ele !== ele) {
-                return i;
-            }
-        }
-        return -1;
-    },
-
     includes: function (element) {
-        return !!~this.indexOf(element, arguments[1]);
+        var start = arguments[1] || 0,
+            elementIsNaN = element !== element;
+        return !!~this.findIndex(function (ele, i) {
+            return i >= start && (ele === element || elementIsNaN && ele !== ele);
+        });
     },
 
     find: function (predicate) {
-        var args = arguments,
+        var thisArg = arguments[1],
             length = this.length;
-        for (var i = pick(args[1], 0); i < length; i++) {
-            if (predicate.call(args[1], this[i], this)) {
+        for (var i = 0; i < length; i++) {
+            if (predicate.call(thisArg, this[i], i, this)) {
                 return this[i];
             }
         }
     },
 
     findIndex: function (predicate) {
-        var args = arguments,
+        var thisArg = arguments[1],
             length = this.length;
-        for (var i = pick(args[1], 0); i < length; i++) {
-            if (predicate.call(args[1], this[i], this)) {
+        for (var i = 0; i < length; i++) {
+            if (predicate.call(thisArg, this[i], i, this)) {
                 return i;
             }
         }
