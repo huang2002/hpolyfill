@@ -1,3 +1,8 @@
+## 0.14.0 - 2019-02-24
+
+- Add `symbol.description`
+- Fix `performance.now()`
+
 ## 0.13.0 - 2019-02-06
 
 - Fix `array.indexOf()`
