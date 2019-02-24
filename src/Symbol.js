@@ -3,11 +3,12 @@ import { patch, patchSome, _String, _window } from "./utils";
 var SYMBOL = 'Symbol';
 
 var _Symbol = patch(_window, SYMBOL, function () {
-    var tag = arguments.length > 0 ? arguments[0] : '';
+    var description = arguments.length > 0 ? arguments[0] : '';
     return {
         constructor: _Symbol,
+        description: description,
         toString: function () {
-            return SYMBOL + '(' + tag + ')';
+            return SYMBOL + '(' + description + ')';
         }
     };
 });

@@ -80,6 +80,7 @@ By the way, as a polyfill lib, this lib should be loaded first in most cases.
     - `Symbol.for()`
     - `Symbol.keyFor()`
     - `Symbol.iterator`
+    - `symbol.description`
 - RAF
     - `requestAnimationFrame()`
     - `cancelAnimationFrame()`
