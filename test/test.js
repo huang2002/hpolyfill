@@ -252,8 +252,8 @@ setTimeout(function () {
 // performance
 const perfTiming0 = performance.now(),
     perfTestDelay = 1000,
-    perfTestAccept = 1000;
+    perfTestAccept = 5;
 setTimeout(function () {
-    const delta = performance.now() - perfTiming0 - perfTestDelay * 1e3;
-    assert(Math.abs(delta) < perfTestAccept * 1e3, true, delta);
+    const delta = performance.now() - perfTiming0 - perfTestDelay;
+    assert(Math.abs(delta) < perfTestAccept, true, delta);
 }, perfTestDelay);
