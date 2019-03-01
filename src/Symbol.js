@@ -1,8 +1,8 @@
-import { patch, patchSome, _String, _window } from "./utils";
+import { patch, patchSome, _String, _window, PROTOTYPE, _Object } from "./utils";
 
 var SYMBOL = 'Symbol';
 
-var _Symbol = patch(_window, SYMBOL, function () {
+var SymbolPolyfill = function Symbol() {
     var description = arguments.length > 0 ? arguments[0] : '';
     return {
         constructor: _Symbol,
@@ -11,7 +11,9 @@ var _Symbol = patch(_window, SYMBOL, function () {
             return SYMBOL + '(' + description + ')';
         }
     };
-});
+};
+
+var _Symbol = patch(_window, SYMBOL, SymbolPolyfill);
 
 var symbolRegistry_keys = [],
     symbolRegistry_symbols = [];
@@ -39,5 +41,17 @@ patchSome(_Symbol, {
     }
 
 });
+
+if (_Symbol !== SymbolPolyfill) {
+    var _SymbolPrototype = _Symbol[PROTOTYPE],
+        DESCRIPTION = 'description';
+    if (!_SymbolPrototype.hasOwnProperty(DESCRIPTION)) {
+        _Object.defineProperty(_SymbolPrototype, DESCRIPTION, {
+            get: function () {
+                return _String(this).slice(7, -1);
+            }
+        });
+    }
+}
 
 export var SYMBOL_ITERATOR = patch(_Symbol, 'iterator', _Symbol('Symbol.iterator'));
