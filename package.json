@@ -23,9 +23,9 @@
     },
     "homepage": "https://github.com/huang2002/hpolyfill#readme",
     "devDependencies": {
-        "rollup": "^1.1.0",
-        "rollup-plugin-terser": "^4.0.2",
-        "terser": "^3.14.1"
+        "rollup": "^1.4.0",
+        "rollup-plugin-terser": "^4.0.4",
+        "terser": "^3.16.1"
     },
     "files": [
         "dist"
