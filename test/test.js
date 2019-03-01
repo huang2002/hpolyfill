@@ -254,8 +254,8 @@ setTimeout(function () {
 
 // performance
 const perfTiming0 = performance.now(),
-    perfTestDelay = 1000,
-    perfTestAccept = 5;
+    perfTestDelay = 1500,
+    perfTestAccept = 1000;
 setTimeout(function () {
     const delta = performance.now() - perfTiming0 - perfTestDelay;
     assert(Math.abs(delta) < perfTestAccept, true, delta);
