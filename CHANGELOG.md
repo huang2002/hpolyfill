@@ -1,3 +1,7 @@
+## 0.15.0 - 2019-03-01
+
+- Improve `symbol.description`
+
 ## 0.14.0 - 2019-02-24
 
 - Add `symbol.description`
