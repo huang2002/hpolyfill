@@ -1,14 +1,12 @@
 "use strict";
 
-// helpers
-
+// common
 const outputEle = document.getElementById('output'),
     stringify = JSON.stringify;
-
+let o, t;
 function print(type, msg) {
     outputEle.innerHTML += '<li class="' + type + '">' + msg + '</li>';
 }
-
 function assert(actual, expected) {
     if (arguments.length < 2) {
         expected = true;
@@ -23,22 +21,6 @@ function assert(actual, expected) {
         }
     }
 }
-
-function iterate(iterator) {
-    var result = [],
-        t = iterator.next();
-    while (!t.done) {
-        result.push(t.value);
-        t = iterator.next();
-    };
-    return result;
-}
-
-function iterable2array(iterable) {
-    return iterate(iterable[Symbol.iterator]());
-}
-
-let o, t;
 
 // Object
 function TestObject() {
@@ -133,15 +115,36 @@ function typeOf(v) {
     return v && type === 'object' && v.constructor === Symbol && v !== Symbol.prototype ?
         'symbol' : type;
 }
+function objectWithStringTag(tag) {
+    return {
+        toString: function () {
+            return tag;
+        }
+    };
+}
 assert(typeOf(Symbol('test')), 'symbol');
 assert(String(Symbol('test')), 'Symbol(test)');
 assert(Symbol('test') !== Symbol('test'));
 assert(Symbol('test') !== Symbol.for('test'));
 assert(Symbol.for('test') === Symbol.for('test'));
 assert(Symbol.keyFor(Symbol.for('test')), 'test');
-assert(Symbol.keyFor(Symbol.for({ toString: function () { return 'foo'; } })), 'foo');
+assert(Symbol.for('baz').description, 'baz');
+assert(Symbol.keyFor(Symbol.for(objectWithStringTag('foo'))), 'foo');
+assert(Symbol.for(objectWithStringTag('bar')).description, 'bar');
 
 // iterators
+function iterate(iterator) {
+    var result = [],
+        t = iterator.next();
+    while (!t.done) {
+        result.push(t.value);
+        t = iterator.next();
+    };
+    return result;
+}
+function iterable2array(iterable) {
+    return iterate(iterable[Symbol.iterator]());
+}
 assert(iterable2array([0, 1, 2]).join(), '0,1,2');
 assert(iterable2array(new Set([0, 1, 2])).join(), '0,1,2');
 assert(iterable2array(new Map([[0, 1], [2, 3]])).join(';'), '0,1;2,3');
