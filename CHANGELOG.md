@@ -1,3 +1,7 @@
+## 0.16.0 - 2019-03-02
+
+- Add `Object.fromEntries()`
+
 ## 0.15.0 - 2019-03-01
 
 - Improve `symbol.description`
