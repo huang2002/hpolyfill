@@ -55,8 +55,14 @@ patchSome(_Object, {
         return _Object.keys(object).map(function (key) {
             return [key, object[key]];
         });
+    },
+
+    fromEntries: function (entries) {
+        var result = {};
+        _Array.from(entries).forEach(function (entry) {
+            result[entry[0]] = entry[1];
+        });
+        return result;
     }
 
 });
-
-

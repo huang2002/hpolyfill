@@ -46,6 +46,8 @@ assert(
         .sort().join(''),
     'adbecf'
 );
+assert(Object.fromEntries([['foo', 'bar']]).foo, 'bar');
+assert(Object.fromEntries(new Map([['foo', 'baz']])).foo, 'baz');
 
 // Number
 assert(Number.isNaN(NaN));

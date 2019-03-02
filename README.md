@@ -63,6 +63,7 @@ By the way, as a polyfill lib, this lib should be loaded first in most cases.
     - `Object.keys()`
     - `Object.values()`
     - `Object.entries()`
+    - `Object.fromEntries()`
 - Number
     - `Number.isNaN()`
     - `Number.isFinite()`
