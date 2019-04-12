@@ -1,11 +1,9 @@
 import { patch, _window } from "./utils";
 
-var startTime = Date.now();
+var _performance = patch(_window, 'performance', {});
 
-patch(
-    patch(_window, 'performance', {}),
-    'now',
-    function () {
-        return Date.now() - startTime;
-    }
-);
+patch(_performance, 'timeOrigin', Date.now());
+
+patch(_performance, 'now', function () {
+    return Date.now() - _performance.timeOrigin;
+});

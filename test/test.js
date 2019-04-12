@@ -255,6 +255,7 @@ setTimeout(function () {
 }, 1000);
 
 // performance
+assert(typeof performance.timeOrigin, 'number');
 const perfTiming0 = performance.now(),
     perfTestDelay = 1500,
     perfTestAccept = 1000;

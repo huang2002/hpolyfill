@@ -86,6 +86,7 @@ By the way, as a polyfill lib, this lib should be loaded first in most cases.
     - `requestAnimationFrame()`
     - `cancelAnimationFrame()`
 - Performance
+    - `performance.timeOrigin`
     - `performance.now()`
 
 ## ps
