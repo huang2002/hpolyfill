@@ -1,3 +1,7 @@
+## 0.17.0 - 2019-04-12
+
+- Add `performance.timeOrigin`
+
 ## 0.16.0 - 2019-03-02
 
 - Add `Object.fromEntries()`
