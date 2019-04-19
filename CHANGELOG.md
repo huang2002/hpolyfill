@@ -1,3 +1,8 @@
+## 0.18.0 - 2019-04-19
+
+- Add `string.trimLeft()`
+- Add `string.trimRight()`
+
 ## 0.17.0 - 2019-04-12
 
 - Add `performance.timeOrigin`
