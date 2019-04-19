@@ -110,6 +110,8 @@ assert('test'.padStart(8, 'abc'), 'abca' + 'test');
 assert('test'.padEnd(6), 'test  ');
 assert('test'.padEnd(6, 'abc'), 'test' + 'ab');
 assert('test'.padEnd(8, 'abc'), 'test' + 'abca');
+assert('\n\t trimLeft \t\n'.trimLeft(), 'trimLeft \t\n');
+assert('\n\t trimRight \t\n'.trimRight(), '\n\t trimRight');
 
 // Symbol
 function typeOf(v) {

@@ -113,6 +113,14 @@ patchSome(_StringPrototype, {
 
         return result;
 
+    },
+
+    trimLeft: function () {
+        return this.replace(/^\s+/, '');
+    },
+
+    trimRight: function () {
+        return this.replace(/\s+$/, '');
     }
 
 });

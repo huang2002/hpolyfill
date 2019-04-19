@@ -75,6 +75,8 @@ By the way, as a polyfill lib, this lib should be loaded first in most cases.
     - `string.endsWith()`
     - `string.padStart()`
     - `string.padEnd()`
+    - `string.trimLeft()`
+    - `string.trimRight()`
     - `string[Symbol.iterator]()`
 - Symbol
     - basic functionality
