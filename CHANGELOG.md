@@ -1,3 +1,8 @@
+## 0.19.0 - 2019-04-20
+
+- Remove `string.trimLeft()` & `string.trimRight`
+- Add `string.trimStart()` & `string.trimEnd`
+
 ## 0.18.0 - 2019-04-19
 
 - Add `string.trimLeft()`
