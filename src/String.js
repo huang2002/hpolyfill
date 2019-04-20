@@ -115,11 +115,11 @@ patchSome(_StringPrototype, {
 
     },
 
-    trimLeft: function () {
+    trimStart: function () {
         return this.replace(/^\s+/, '');
     },
 
-    trimRight: function () {
+    trimEnd: function () {
         return this.replace(/\s+$/, '');
     }
 
