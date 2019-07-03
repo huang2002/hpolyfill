@@ -42,6 +42,14 @@ export var patchSome = function (target, map) {
     }
 }
 
+export var removeIndex = function (array, index) {
+    var length = array.length;
+    for (var i = index + 1; i < length; i++) {
+        array[i - 1] = array[i];
+    }
+    array.length--;
+}
+
 export var check = function (value) {
     if (value == _undefined) {
         throw new _TypeError('Cannot convert undefined or null to object');
