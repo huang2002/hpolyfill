@@ -1,3 +1,8 @@
+### 0.19.1 - 2019-07-03
+
+- Fix `Map.delete()` & `Set.delete()`
+- Improve some internals
+
 ## 0.19.0 - 2019-04-20
 
 - Remove `string.trimLeft()` & `string.trimRight`
