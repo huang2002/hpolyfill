@@ -1,4 +1,4 @@
-import { test, patch, createClass, checkThis, _Array, _Object, isFn, _window, PROTOTYPE } from "./utils";
+import { test, patch, createClass, checkThis, _Array, _Object, isFn, _window, PROTOTYPE, removeIndex } from "./utils";
 import { SYMBOL_ITERATOR } from "./Symbol";
 
 test(_window, 'Set', function (Set) {
@@ -48,13 +48,13 @@ var _Set = patch(_window, 'Set', createClass(
         delete: function (element) {
             var index = this._values.indexOf(element);
             if (!~index) {
-                this._values.splice(index, 1);
+                removeIndex(this._values, index);
             }
             return this;
         },
 
         forEach: function (callback) {
-            this._values.forEach(function (element) {
+            this._values.slice().forEach(function (element) {
                 callback(element, element, this);
             }, this);
         },

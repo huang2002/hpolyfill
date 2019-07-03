@@ -1,4 +1,4 @@
-import { test, patch, createClass, checkThis, _window, _Array, _undefined, isFn, _Object, PROTOTYPE } from "./utils";
+import { test, patch, createClass, checkThis, _window, _Array, _undefined, isFn, _Object, PROTOTYPE, removeIndex } from "./utils";
 import { SYMBOL_ITERATOR } from "./Symbol";
 
 test(_window, 'Map', function (Map) {
@@ -61,15 +61,15 @@ var _Map = patch(_window, 'Map', createClass(
         delete: function (key) {
             var index = this._keys.indexOf(key);
             if (!~index) {
-                this._keys.splice(index, 1);
-                this._values.splice(index, 1);
+                removeIndex(this._keys, index);
+                removeIndex(this._values, index);
             }
             return this;
         },
 
         forEach: function (callback) {
-            var values = this._values;
-            this._keys.forEach(function (key, i) {
+            var values = this._values.slice();
+            this._keys.slice().forEach(function (key, i) {
                 callback(values[i], key, this);
             }, this);
         },

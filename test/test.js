@@ -84,11 +84,29 @@ assert([0, 1, 2].findIndex(function (x) { return x > 1; }), 2);
 let set = new Set([+0, -0]);
 assert(set.size, 1);
 assert(set.has(-0));
+t = [];
+set = new Set([0, 1, 2]);
+set.forEach(function (v, i) {
+    t.push(v);
+    if (v === 1) {
+        set.delete(i);
+    }
+});
+assert(t.length, 3);
 
 // Map
 let map = new Map([[+0, 1], [-0, -1]]);
 assert(map.size, 1);
 assert(map.get(-0), -1);
+t = [];
+map = new Map([[0, 0], [1, 1], [2, 2]]);
+map.forEach(function (v, i) {
+    t.push(v);
+    if (i === 1) {
+        map.delete(i);
+    }
+});
+assert(t.length, 3);
 
 // String
 assert(String.raw({ raw: ['a', 'c'] }, 'b', 'd'), 'abc');
