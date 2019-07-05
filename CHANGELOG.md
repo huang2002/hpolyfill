@@ -1,3 +1,7 @@
+### 0.19.2 - 2019-07-05
+
+- Fix `Promise.race()` & `Promise.all()`
+
 ### 0.19.1 - 2019-07-03
 
 - Fix `Map.delete()` & `Set.delete()`
