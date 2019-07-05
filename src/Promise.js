@@ -155,8 +155,12 @@ patchSome(_Promise, {
 
     race: function (promises) {
         return new _Promise(function (resolve, reject) {
-            _Array.from(promises).forEach(function (promise) {
-                promise.then(resolve, reject);
+            _Array.from(promises).forEach(function (element) {
+                if (element && element.then) {
+                    element.then(resolve, reject);
+                } else {
+                    resolve(element);
+                }
             });
         });
     },
@@ -167,16 +171,23 @@ patchSome(_Promise, {
             var rest = promises.length,
                 results = new Array(rest);
 
-            _Array.from(promises).forEach(function (promise, i) {
-                promise.then(
-                    function (data) {
-                        results[i] = data;
-                        if (--rest === 0) {
-                            resolve(results);
-                        }
-                    },
-                    reject
-                );
+            _Array.from(promises).forEach(function (element, i) {
+                if (element && element.then) {
+                    element.then(
+                        function (data) {
+                            results[i] = data;
+                            if (--rest === 0) {
+                                resolve(results);
+                            }
+                        },
+                        reject
+                    );
+                } else {
+                    results[i] = element;
+                    if (--rest === 0) {
+                        resolve(results);
+                    }
+                }
             });
 
         });
