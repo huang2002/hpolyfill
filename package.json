@@ -4,7 +4,8 @@
     "description": "A lightweight polyfill lib.",
     "main": "dist/index.js",
     "scripts": {
-        "build": "rollup -c"
+        "build": "rollup -c",
+        "test": "3h-serve"
     },
     "repository": {
         "type": "git",
@@ -23,6 +24,7 @@
     },
     "homepage": "https://github.com/huang2002/hpolyfill#readme",
     "devDependencies": {
+        "3h-serve": "^0.6.2",
         "rollup": "^1.19.4",
         "rollup-plugin-terser": "^4.0.4",
         "terser": "^3.17.0"
