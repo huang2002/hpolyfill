@@ -8,3 +8,4 @@ import "./Set";
 import "./Map";
 import "./Performance";
 import "./RAF";
+import "./fetch";
