@@ -4,7 +4,7 @@ var STATUS_PENDING = 'pending',
     STATUS_RESOLVED = 'resolved',
     STATUS_REJECTED = 'rejected';
 
-var _Promise = patch(_window, 'Promise', createClass(
+export var _Promise = patch(_window, 'Promise', createClass(
     function Promise(executor) {
         checkThis(this, _Promise);
 

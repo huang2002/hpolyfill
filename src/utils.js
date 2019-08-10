@@ -2,6 +2,7 @@ export var PROTOTYPE = 'prototype';
 
 export var _window = window,
     _Object = Object,
+    _defineProperty = _Object.defineProperty,
     _Array = Array,
     _ArrayPrototype = _Array[PROTOTYPE],
     _String = String,
@@ -25,7 +26,7 @@ export var isFn = function (value) {
 export var patch = function (target, name, polyfill) {
     if (!target[name]) {
         var isFnPolyfill = isFn(polyfill);
-        _Object.defineProperty(target, name, {
+        _defineProperty(target, name, {
             value: polyfill,
             configurable: isFnPolyfill,
             writable: isFnPolyfill
@@ -59,7 +60,7 @@ export var check = function (value) {
 export var createClass = function (constructor, prototype) {
     for (var key in prototype) {
         var desc = prototype[key];
-        _Object.defineProperty(
+        _defineProperty(
             constructor[PROTOTYPE],
             key,
             (isType(desc, 'object') && desc.get) ?
@@ -86,3 +87,7 @@ export var test = function (target, name, tester) {
         delete target[name];
     }
 }
+
+export var createEmptyObject = function () {
+    return _Object.create(null);
+};

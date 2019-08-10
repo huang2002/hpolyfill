@@ -1,4 +1,4 @@
-import { patch, patchSome, _String, _window, PROTOTYPE, _Object } from "./utils";
+import { patch, patchSome, _String, _window, PROTOTYPE, _defineProperty } from "./utils";
 
 var SYMBOL = 'Symbol';
 
@@ -46,7 +46,7 @@ if (_Symbol !== SymbolPolyfill) {
     var _SymbolPrototype = _Symbol[PROTOTYPE],
         DESCRIPTION = 'description';
     if (!_SymbolPrototype.hasOwnProperty(DESCRIPTION)) {
-        _Object.defineProperty(_SymbolPrototype, DESCRIPTION, {
+        _defineProperty(_SymbolPrototype, DESCRIPTION, {
             get: function () {
                 return _String(this).slice(7, -1);
             }
