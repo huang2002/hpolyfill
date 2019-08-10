@@ -283,3 +283,17 @@ setTimeout(function () {
     const delta = performance.now() - perfTiming0 - perfTestDelay;
     assert(Math.abs(delta) < perfTestAccept, true, delta);
 }, perfTestDelay);
+
+// fetch
+fetch('./test.json').then(function (res) {
+    assert(res.status, 200);
+    return res.json();
+}).then(function (obj) {
+    assert(obj.foo, 'bar');
+});
+fetch(new Request('./test.json')).then(function (res) {
+    assert(res.statusText, 'OK');
+    return res.text();
+}).then(function (json) {
+    assert(JSON.parse(json).foo, 'bar');
+});
