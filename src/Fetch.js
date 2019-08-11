@@ -131,12 +131,12 @@ var FETCH_INIT_DEFAULTS = {
 patch(_window, 'fetch', function fetch(resource) {
     return new _Promise(function (resolve, reject) {
         var xhr = new XMLHttpRequest(),
-            init;
+            init=arguments[1];
         if (resource instanceof _Request) {
-            init = resource;
+            init = _Object.assign(createEmptyObject(), resource, init);
             resource = resource.url;
         } else {
-            init = _Object.assign(createEmptyObject(), FETCH_INIT_DEFAULTS, arguments[1]);
+            init = _Object.assign(createEmptyObject(), FETCH_INIT_DEFAULTS, init);
         }
         xhr.open(init.method, resource);
         xhr.withCredentials = init.credentials !== 'omit';
