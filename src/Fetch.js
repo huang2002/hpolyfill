@@ -131,7 +131,7 @@ var FETCH_INIT_DEFAULTS = {
 patch(_window, 'fetch', function fetch(resource) {
     return new _Promise(function (resolve, reject) {
         var xhr = new XMLHttpRequest(),
-            init=arguments[1];
+            init = arguments[1];
         if (resource instanceof _Request) {
             init = _Object.assign(createEmptyObject(), resource, init);
             resource = resource.url;
@@ -140,10 +140,21 @@ patch(_window, 'fetch', function fetch(resource) {
         }
         xhr.open(init.method, resource);
         xhr.withCredentials = init.credentials !== 'omit';
-        if (init.headers) {
-            _Object.entries(init.headers, function (header) {
-                xhr.setRequestHeader(header[0], header[1]);
-            });
+        var headers = init.headers;
+        if (headers) {
+            if (headers instanceof _Headers) {
+                headers.forEach(function (value, name) {
+                    xhr.setRequestHeader(name, value);
+                });
+            } else if (_Array.isArray(headers)) {
+                headers.forEach(function (header) {
+                    xhr.setRequestHeader(header[0], header[1]);
+                });
+            } else {
+                _Object.entries(headers, function (header) {
+                    xhr.setRequestHeader(header[0], header[1]);
+                });
+            }
         }
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
