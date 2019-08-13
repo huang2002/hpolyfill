@@ -1,4 +1,4 @@
-import { patch, _window, _Object, createClass, createEmptyObject, _defineProperty, _Array } from "./utils";
+import { patch, _window, _Object, createClass, createEmptyObject, _Array, defineProperty } from "./utils";
 import { _Promise } from "./Promise";
 
 var _Headers = patch(_window, 'Headers', createClass(
@@ -50,26 +50,26 @@ var _Request = patch(_window, 'Request', createClass(
     function Request(resource) {
         var init;
         if (resource instanceof _Request) {
-            _defineProperty(this, 'url', { value: resource.url });
+            defineProperty(this, 'url', resource.url);
             init = resource;
         } else {
-            _defineProperty(this, 'url', { value: resource });
+            defineProperty(this, 'url', resource);
             init = arguments[1] || createEmptyObject();
         }
         _Object.keys(REQUEST_INIT_DEFAULTS).forEach(function (key) {
             if (key === 'headers' && key in init) {
                 var headers = init[key];
-                _defineProperty(this, key, {
-                    value: headers instanceof _Headers ? headers : new _Headers(headers)
-                });
+                defineProperty(this, key,
+                    headers instanceof _Headers ? headers : new _Headers(headers)
+                );
             } else {
-                _defineProperty(this, key, {
-                    value: key in init ? init[key] : REQUEST_INIT_DEFAULTS[key]
-                });
+                defineProperty(this, key,
+                    key in init ? init[key] : REQUEST_INIT_DEFAULTS[key]
+                );
             }
         }, this);
         if (!this.headers) {
-            _defineProperty(this, 'headers', { value: new _Headers() });
+            defineProperty(this, 'headers', new _Headers());
         }
         if ('body' in this) {
             this._body = this.body;
@@ -91,18 +91,18 @@ var _Response = patch(_window, 'Response', createClass(
         if (args[1]) {
             _Object.entries(args[1]).forEach(function (entry) {
                 if (entry[0] !== 'headers' || entry[1] instanceof _Headers) {
-                    _defineProperty(this, entry[0], { value: entry[1] });
+                    defineProperty(this, entry[0], entry[1]);
                 } else {
-                    _defineProperty(this, entry[0], { value: new _Headers(entry[1]) });
+                    defineProperty(this, entry[0], new _Headers(entry[1]));
                 }
             }, this);
         }
         if (!this.headers) {
-            _defineProperty(this, 'headers', { value: new _Headers() });
+            defineProperty(this, 'headers', new _Headers());
         }
         if (!('status' in this)) {
-            _defineProperty(this, 'status', { value: 200 });
-            _defineProperty(this, 'statusText', { value: 'OK' });
+            defineProperty(this, 'status', 200);
+            defineProperty(this, 'statusText', 'OK');
         }
     }, {
         clone: function () {
