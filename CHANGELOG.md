@@ -1,3 +1,7 @@
+## 0.20.0 - 2019-08-13
+
+- Add polyfills for Fetch APIs
+
 ### 0.19.2 - 2019-07-05
 
 - Fix `Promise.race()` & `Promise.all()`

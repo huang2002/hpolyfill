@@ -90,6 +90,34 @@ By the way, as a polyfill lib, this lib should be loaded first in most cases.
 - Performance
     - `performance.timeOrigin`
     - `performance.now()`
+- Fetch ([partial](#fetch-polyfill-details))
+    - `fetch()`
+    - `Headers()`
+    - `Request()`
+    - `Response()`
+
+### Fetch Polyfill Details
+
+This polyfill lib only provides a partial implemention of the Fetch APIs. Since `XMLHttpRequest` is used internally, some features are not available.
+
+Here are the polyfill details:
+
+- `fetch(resource, init?)`
+    - `resource` can be either an url string or an instance of `Request`
+    - `init` is optional and only accepts the following options:
+        - `method` - request method
+        - `credentials` - no cookies if set to `'omit'`; otherwise, attach cookies
+        - `headers` - either an instance of `Headers`, or an array of string arrays, or a plain object representing headers
+- `Headers(init?)`
+    - full support
+- `Request(resource?, init?)`
+    - `resource` and `init` are similar to `fetch()`
+    - `request.clone()`, `request.json()` and `request.text()` are supported
+- `Response(body?, init?)`
+    - `body` - optional response body
+    - `init` - optional options
+    - `response.ok` - `true` if the status code is between 200 and 299; `false` otherwise
+    - `response.clone()`, `response.json()` and `response.text()` are supported
 
 ## ps
 
