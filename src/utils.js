@@ -91,3 +91,10 @@ export var test = function (target, name, tester) {
 export var createEmptyObject = function () {
     return _Object.create(null);
 };
+
+export var defineProperty = function (object, name, value) {
+    _defineProperty(object, name, {
+        get: function () { return value; },
+        enumerable: true
+    });
+};
