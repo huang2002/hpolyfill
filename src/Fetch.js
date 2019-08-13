@@ -3,7 +3,12 @@ import { _Promise } from "./Promise";
 
 var _Headers = patch(_window, 'Headers', createClass(
     function Headers() {
-        this._map = new Map(arguments[0]);
+        var init = arguments[0];
+        this._map = new Map(init && (
+            init instanceof Headers ?
+                init._map :
+                _Array.isArray(init) ? init : _Object.entries(init)
+        ));
     }, {
         append: function (name, value) {
             var map = this._map;
@@ -54,17 +59,9 @@ var _Request = patch(_window, 'Request', createClass(
         _Object.keys(REQUEST_INIT_DEFAULTS).forEach(function (key) {
             if (key === 'headers' && key in init) {
                 var headers = init[key];
-                if (headers instanceof _Headers) {
-                    _defineProperty(this, key, headers);
-                } else {
-                    _defineProperty(this, key, {
-                        value: new _Headers(
-                            _Array.isArray(headers) ?
-                                headers :
-                                _Object.entries(headers)
-                        )
-                    });
-                }
+                _defineProperty(this, key, {
+                    value: headers instanceof _Headers ? headers : new _Headers(headers)
+                });
             } else {
                 _defineProperty(this, key, {
                     value: key in init ? init[key] : REQUEST_INIT_DEFAULTS[key]
@@ -93,9 +90,11 @@ var _Response = patch(_window, 'Response', createClass(
         this._body = args.length > 0 ? args[0] : '';
         if (args[1]) {
             _Object.entries(args[1]).forEach(function (entry) {
-                _defineProperty(this, entry[0], {
-                    value: entry[1]
-                });
+                if (entry[0] !== 'headers' || entry[1] instanceof _Headers) {
+                    _defineProperty(this, entry[0], { value: entry[1] });
+                } else {
+                    _defineProperty(this, entry[0], { value: new _Headers(entry[1]) });
+                }
             }, this);
         }
         if (!this.headers) {
