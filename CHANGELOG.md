@@ -1,3 +1,8 @@
+## 0.21.0 - 2019-08-14
+
+- Add `Promise.allSettled`
+- Fix `Promise.all`
+
 ## 0.20.0 - 2019-08-13
 
 - Add polyfills for Fetch APIs
