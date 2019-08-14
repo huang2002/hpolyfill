@@ -166,12 +166,16 @@ patchSome(_Promise, {
     },
 
     all: function (promises) {
+        promises = _Array.from(promises);
         return new _Promise(function (resolve, reject) {
 
-            var rest = promises.length,
-                results = new Array(rest);
+            var rest = promises.length;
+            if (!rest) {
+                return resolve([]);
+            }
 
-            _Array.from(promises).forEach(function (element, i) {
+            var results = new _Array(rest);
+            promises.forEach(function (element, i) {
                 if (element && element.then) {
                     element.then(
                         function (data) {
