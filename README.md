@@ -40,6 +40,7 @@ By the way, as a polyfill lib, this lib should be loaded first in most cases.
 - Promise
     - basic functionality
     - `Promise.all()`
+    - `Promise.allSettled()`
     - `Promise.race()`
     - `Promise.resolve()`
     - `Promise.reject()`

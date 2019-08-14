@@ -197,6 +197,40 @@ patchSome(_Promise, {
         });
     },
 
+    allSettled: function (promises) {
+        promises = _Array.from(promises);
+        return new _Promise(function (resolve) {
+
+            var rest = promises.length;
+            if (!rest) {
+                return resolve([]);
+            }
+
+            var results = new _Array(rest);
+            promises.forEach(function (element, i) {
+                if (element && element.then) {
+                    element.then(function (data) {
+                        results[i] = { status: STATUS_FULFILLED, value: data };
+                        if (--rest === 0) {
+                            resolve(results);
+                        }
+                    }, function (reason) {
+                        results[i] = { status: STATUS_REJECTED, reason: reason };
+                        if (--rest === 0) {
+                            resolve(results);
+                        }
+                    });
+                } else {
+                    results[i] = { status: STATUS_FULFILLED, value: element };
+                    if (--rest === 0) {
+                        resolve(results);
+                    }
+                }
+            });
+
+        });
+    },
+
     resolve: function (data) {
         return data instanceof _Promise ? data : new _Promise(function (resolve) {
             resolve(data);
