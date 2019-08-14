@@ -228,7 +228,8 @@ const testData = 'test data',
 })).catch(function (reason) {
     assert(reason, testReason);
 });
-const usefulReason = 'useful reason',
+const uselessData = 'useless data 0',
+    usefulReason = 'useful reason',
     fastestData = 'fastest data',
     fastReason = 'fast reason';
 Promise.all([
@@ -241,12 +242,26 @@ Promise.all([
     assert(reason, undefined);
 });
 Promise.all([
-    resolveLater('useless data 0', 100),
+    resolveLater(uselessData, 100),
     rejectLater(usefulReason, 150)
 ]).then(function (dataArray) {
     assert(dataArray, undefined);
 }, function (reason) {
     assert(reason, usefulReason);
+});
+Promise.allSettled([
+    'allSettled',
+    resolveLater(uselessData, 100),
+    rejectLater(usefulReason, 150)
+]).then(function (dataArray) {
+    assert(dataArray[0].status, 'fulfilled');
+    assert(dataArray[0].value, 'allSettled');
+    assert(dataArray[1].status, 'fulfilled');
+    assert(dataArray[1].value, uselessData);
+    assert(dataArray[2].status, 'rejected');
+    assert(dataArray[2].reason, usefulReason);
+}, function (reason) {
+    assert(reason, undefined);
 });
 Promise.race([
     resolveLater('second fastest data', 50),
