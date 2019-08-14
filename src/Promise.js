@@ -1,7 +1,7 @@
 import { patch, patchSome, createClass, checkThis, _setTimeout, _undefined, isFn, _window, PROTOTYPE, _Array } from "./utils";
 
 var STATUS_PENDING = 'pending',
-    STATUS_RESOLVED = 'resolved',
+    STATUS_FULFILLED = 'fulfilled',
     STATUS_REJECTED = 'rejected';
 
 export var _Promise = patch(_window, 'Promise', createClass(
@@ -28,7 +28,7 @@ export var _Promise = patch(_window, 'Promise', createClass(
             if (data instanceof _Promise) {
                 data.then(this._resolve.bind(this), this._reject.bind(this));
             } else {
-                this._status = STATUS_RESOLVED;
+                this._status = STATUS_FULFILLED;
                 this._value = data;
                 var callbacks = this._onresolved;
                 _setTimeout(function () {
@@ -109,7 +109,7 @@ export var _Promise = patch(_window, 'Promise', createClass(
                         }
                     });
 
-                } else if (status === STATUS_RESOLVED) {
+                } else if (status === STATUS_FULFILLED) {
 
                     if (isFn(onresolved)) {
                         _setTimeout(function () {
