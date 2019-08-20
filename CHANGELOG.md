@@ -1,3 +1,8 @@
+## 0.22.0 - 2019-08-20
+
+- Add `Math.sign`
+- Add `Math.trunc`
+
 ## 0.21.0 - 2019-08-14
 
 - Add `Promise.allSettled`
