@@ -68,6 +68,9 @@ By the way, as a polyfill lib, this lib should be loaded first in most cases.
 - Number
     - `Number.isNaN()`
     - `Number.isFinite()`
+- Math
+    - `Math.sign()`
+    - `Math.trunc()`
 - String
     - `String.raw()`
     - `string.includes()`
