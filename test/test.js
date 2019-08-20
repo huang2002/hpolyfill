@@ -57,6 +57,27 @@ assert(Number.isFinite(NaN), false);
 assert(Number.isFinite(Infinity), false);
 assert(Number.isFinite('not finite'), false);
 
+// Math
+assert(Math.sign(666), 1);
+assert(Math.sign('666'), 1);
+assert(Math.sign(-9), -1);
+assert(Math.sign('-9'), -1);
+assert(1 / Math.sign(0), Infinity);
+assert(1 / Math.sign(-0), -Infinity);
+assert(Number.isNaN(Math.sign('???')));
+assert(Math.trunc(1011), 1011);
+assert(Math.trunc('1011'), 1011);
+assert(Math.trunc(-1011), -1011);
+assert(Math.trunc('-1011'), -1011);
+assert(Math.trunc(12.34), 12);
+assert(Math.trunc('12.34'), 12);
+assert(Math.trunc(-12.34), -12);
+assert(Math.trunc('-12.34'), -12);
+assert(Math.trunc(56.78), 56);
+assert(Math.trunc('56.78'), 56);
+assert(Math.trunc(-56.78), -56);
+assert(Math.trunc('-56.78'), -56);
+
 // Array
 (function () {
     assert(Array.from(arguments).join(), '0,1');
