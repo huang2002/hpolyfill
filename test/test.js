@@ -5,16 +5,16 @@ const outputEle = document.getElementById('output'),
     stringify = JSON.stringify;
 let o, t;
 function print(type, msg) {
-    outputEle.innerHTML += '<li class="' + type + '">' + msg + '</li>';
+    outputEle.innerHTML += '<span class="' + type + '">' + msg + '</span>';
 }
 function assert(actual, expected) {
     if (arguments.length < 2) {
         expected = true;
     }
     if (actual === expected) {
-        print('log', stringify(expected) + ' passed.' + '</li>');
+        print('log', stringify(expected) + ' passed.');
     } else {
-        print('err', 'expect->' + stringify(expected) + ' actual->' + stringify(actual) + '</li>');
+        print('err', 'expect->' + stringify(expected) + ' actual->' + stringify(actual));
         console.trace(stringify(expected) + ' actual->' + stringify(actual));
         if (arguments.length > 2) {
             console.log(arguments[2]);
