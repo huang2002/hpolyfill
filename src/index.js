@@ -1,5 +1,6 @@
 import "./Symbol";
 import "./Number";
+import "./Math";
 import "./String";
 import "./Array";
 import "./Object";
