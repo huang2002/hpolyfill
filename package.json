@@ -25,9 +25,9 @@
     "homepage": "https://github.com/huang2002/hpolyfill#readme",
     "devDependencies": {
         "3h-serve": "^0.6.2",
-        "rollup": "^1.19.4",
-        "rollup-plugin-terser": "^4.0.4",
-        "terser": "^3.17.0"
+        "rollup": "^1.27.12",
+        "rollup-plugin-terser": "^5.1.3",
+        "terser": "^4.4.2"
     },
     "files": [
         "dist"
